@@ -70,12 +70,18 @@
     display: flex;
     background: var(--main-background);
     color: var(--main-font-color-footer);
+    text-shadow: 1px 2px 3px #302f2f;
     position: relative;
 }
 
 .site-footer section {
     text-align: left;
     margin-bottom: 1em;
+}
+
+.site-footer .links li,
+.site-footer .social-media li {
+    text-shadow: none;
 }
 
 .footer-title {
