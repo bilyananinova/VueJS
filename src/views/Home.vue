@@ -112,8 +112,6 @@ export default {
     </section>
 </template>
 
-
-
 <style scoped>
 .home-wrapper {
     background: linear-gradient(rgba(0, 0, 0, 0),
