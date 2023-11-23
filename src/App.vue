@@ -1,11 +1,14 @@
 <script>
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
+import Home from './views/Home.vue';
 
 export default {
   components: {
     Header,
-    Footer
+    Home,
+    Footer,
+    Home
   }
 }
 </script>
@@ -13,13 +16,13 @@ export default {
 <template>
   <Header />
   <main class="site-main">
-
+    <Home />
   </main>
   <Footer />
 </template>
 
 <style>
 .site-main {
-  min-height: 70vh;
+  /* min-height: 70vh; */
 }
 </style>

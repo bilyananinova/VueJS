@@ -1,8 +1,10 @@
 @import "https://use.fontawesome.com/releases/v5.10.2/css/all.css";
 
-*, *::before, *::after{
-  margin: 0; 
-  padding: 0; 
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
   box-sizing: inherit;
 }
 
@@ -14,40 +16,66 @@
   --main-copyright-background: #337a32;
 }
 
-html, body {
-  box-sizing: border-box;    
+html,
+body {
+  box-sizing: border-box;
   font-size: 14px;
   line-height: 1.5em;
   color: var(--main-font-color);
 }
 
-body, input, textarea{
+body,
+input,
+textarea {
   font-family: Verdana, Geneva, sans-serif;
 }
 
-label, button {
+label,
+button {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: inherit;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: Georgia, "Times New Roman", Times, serif;
-  margin-top: 1em; 
-  line-height: normal; 
-  font-weight: normal; 
-  text-transform: capitalize; 
+  margin-top: 1em;
+  line-height: normal;
+  font-weight: normal;
+  text-transform: capitalize;
   font-variant: small-caps;
 }
 
-h1 {font-size: 2.5em;}
-h2 {font-size: 2.3em;}
-h3 {font-size: 2.0em;}
-h4 {font-size: 1.8em;}
-h5 {font-size: 1.5em;}
-h6 {font-size: 1.2em;}
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2.3em;
+}
+
+h3 {
+  font-size: 2.0em;
+}
+
+h4 {
+  font-size: 1.8em;
+}
+
+h5 {
+  font-size: 1.5em;
+}
+
+h6 {
+  font-size: 1.2em;
+}
 
 a {
-  outline: none; 
+  outline: none;
   text-decoration: none;
   font-size: inherit;
 }
@@ -67,4 +95,3 @@ li {
   display: flex;
   flex-direction: column;
 }
-
