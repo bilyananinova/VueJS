@@ -100,3 +100,7 @@ li {
   display: flex;
   flex-direction: column;
 }
+
+.required {
+  color: #ff0000;
+}

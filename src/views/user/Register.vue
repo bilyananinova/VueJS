@@ -52,16 +52,16 @@ export default {
     position: relative;
 }
 
-.register-form p {
-    font-family: var(--main-font-family-headings);
-}
-
 .register-form {
     display: flex;
     flex-direction: column;
     text-align: left;
     width: 50%;
     margin: 3em auto;
+}
+
+.register-form p {
+    font-family: var(--main-font-family-headings);
 }
 
 .register-form label {
@@ -119,7 +119,5 @@ export default {
     display: block;
 }
 
-.required {
-    color: #ff0000;
-}
+
 </style>
