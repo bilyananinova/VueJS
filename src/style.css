@@ -1,79 +1,70 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "https://use.fontawesome.com/releases/v5.10.2/css/all.css";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*, *::before, *::after{
+  margin: 0; 
+  padding: 0; 
+  box-sizing: inherit;
 }
+
+:root {
+  --main-background: #58DF55;
+  --main-font-color: #302f2f;
+  --main-font-color-hover: #fff;
+  --main-font-color-footer: #fff;
+  --main-copyright-background: #337a32;
+}
+
+html, body {
+  box-sizing: border-box;    
+  font-size: 14px;
+  line-height: 1.5em;
+  color: var(--main-font-color);
+}
+
+body, input, textarea{
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+label, button {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: inherit;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin-top: 1em; 
+  line-height: normal; 
+  font-weight: normal; 
+  text-transform: capitalize; 
+  font-variant: small-caps;
+}
+
+h1 {font-size: 2.5em;}
+h2 {font-size: 2.3em;}
+h3 {font-size: 2.0em;}
+h4 {font-size: 1.8em;}
+h5 {font-size: 1.5em;}
+h6 {font-size: 1.2em;}
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  outline: none; 
+  text-decoration: none;
+  font-size: inherit;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+li {
+  list-style: none;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.card {
-  padding: 2em;
+.fas {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
