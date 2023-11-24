@@ -1,61 +1,86 @@
 <template>
-    <footer class="site-footer">
-        <section class="footer-wrapper">
-            <section class="contacts">
-                <h6 class="footer-title">Contacts</h6>
-                <ul>
-                    <li>
-                        <address>
-                            Street Name &amp; Number, Town, Postcode/Zip
-                        </address>
-                    </li>
-                    <li>+359 888 000 000</li>
-                    <li>email@mail.bg</li>
-                </ul>
-            </section>
+  <footer class="site-footer">
+    <section class="footer-wrapper">
+      <section class="contacts">
+        <h6 class="footer-title">
+          Contacts
+        </h6>
+        <ul>
+          <li>
+            <address>
+              Street Name &amp; Number, Town, Postcode/Zip
+            </address>
+          </li>
+          <li>+359 888 000 000</li>
+          <li>email@mail.bg</li>
+        </ul>
+      </section>
 
-            <section class="links">
-                <h6 class="footer-title">Links</h6>
-                <ul>
-                    <li>
-                        <a href="/">Help & FAQs</a>
-                    </li>
-                    <li>
-                        <a href="/">Terms and Condition</a>
-                    </li>
-                    <li>
-                        <a href="/">Privacy Policy</a>
-                    </li>
-                    <li>
-                        <a href="/">Delivery</a>
-                    </li>
-                    <li>
-                        <a href="/">Refer a Friend</a>
-                    </li>
-                </ul>
-            </section>
+      <section class="links">
+        <h6 class="footer-title">
+          Links
+        </h6>
+        <ul>
+          <li>
+            <router-link to="/">
+              Help & FAQs
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/">
+              Terms and Condition
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/">
+              Privacy Policy
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/">
+              Delivery
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/">
+              Refer a Friend
+            </router-link>
+          </li>
+        </ul>
+      </section>
 
-            <section class="social-media">
-                <h6 class="footer-title">Social media</h6>
-                <ul>
-                    <li>
-                        <a href="/"><i class="fab fa-facebook-square"></i></a>
-                    </li>
-                    <li>
-                        <a href="/"><i class="fab fa-twitter-square"></i></a>
-                    </li>
-                    <li>
-                        <a href="/"><i class="fab fa-instagram"></i></a>
-                    </li>
-                </ul>
-            </section>
-        </section>
-    </footer>
-    <section class="copyright">
-        <p>Copyright &copy; 2023 - All Rights Reserved -
-            <a href="/">Coffe Shop VueJS</a>
-        </p>
+      <section class="social-media">
+        <h6 class="footer-title">
+          Social media
+        </h6>
+        <ul>
+          <li>
+            <router-link to="/">
+              <i class="fab fa-facebook-square" />
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/">
+              <i class="fab fa-twitter-square" />
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/">
+              <i class="fab fa-instagram" />
+            </router-link>
+          </li>
+        </ul>
+      </section>
     </section>
+  </footer>
+  <section class="copyright">
+    <p>
+      Copyright &copy; 2023 - All Rights Reserved -
+      <router-link to="/">
+        Coffe Shop VueJS
+      </router-link>
+    </p>
+  </section>
 </template>
 
 <style scoped>

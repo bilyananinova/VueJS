@@ -1,36 +1,49 @@
 <script>
 export default {
 
-}
+};
 </script>
 
 <template>
-    <h3>Login Page</h3>
-    <div class="form-wrapper">
+  <h3>Login Page</h3>
+  <div class="form-wrapper">
+    <section class="form-img">
+      <img src="../../assets/login.jpg" alt="">
+    </section>
 
-        <section class="form-img">
-            <img src="../../assets/login.jpg"
-                alt="" />
-        </section>
+    <section class="form-section">
+      <form class="login-form">
+        <label htmlFor="login-email">Email address<span class="required">*</span></label>
+        <input
+          id="login-email"
+          type="email"
+          class="form-input"
+          name="email"
+          placeholder="ivan@mail.bg"
+        >
 
-        <section class="form-section">
+        <label htmlFor="login-password">Password <span class="required">*</span></label>
+        <input
+          id="login-password"
+          type="password"
+          class="form-input"
+          name="password"
+          placeholder="******"
+        >
 
-            <form class="login-form">
-                <label htmlFor="login-email">Email address<span class="required">*</span></label>
-                <input type="email" class="form-input" id="login-email" name="email" placeholder="ivan@mail.bg" />
+        <button type="submit" class="login-button">
+          Login
+        </button>
 
-                <label htmlFor="login-password">Password <span class="required">*</span></label>
-                <input type="password" class="form-input" id="login-password" name="password" placeholder="******" />
-
-                <button type="submit" class="login-button">Login</button>
-
-                <p>Don't have an account?
-                    <a href="/register">Register</a> now.
-                </p>
-            </form>
-            
-        </section>
-    </div>
+        <p>
+          Don't have an account?
+          <router-link to="/register">
+            Register
+          </router-link> now.
+        </p>
+      </form>
+    </section>
+  </div>
 </template>
 
 <style scoped>
@@ -112,5 +125,4 @@ export default {
     content: '';
     display: block;
 }
-
 </style>

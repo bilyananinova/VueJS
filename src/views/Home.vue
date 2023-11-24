@@ -5,111 +5,118 @@ export default {
 </script>
 
 <template>
-    <section class="home-wrapper">
-        <h3>From Our Blog</h3>
-        <section class="last-articles">
-
-            <a href="#">
-                <section class="home-article-card">
-                    <section class="home-article-image">
-                        <img src="../assets/janko-ferlic-h9Iq22JJlGk-unsplash.jpg" alt="title" />
-                    </section>
-                    <header class="home-article-header">
-                        <h6>Title</h6>
-                    </header>
-                    <section class="home-article-content">
-                        <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam quisquam impedit repudiandae
-                            praesentium vero sunt sequi voluptate quibusdam quas, numquam harum beatae porro accusamus
-                            rerum.</p>
-                    </section>
-                </section>
-            </a>
-
-            <a href="#">
-                <section class="home-article-card">
-                    <section class="home-article-image">
-                        <img src="../assets/mike-kenneally-tNALoIZhqVM-unsplash.jpg" alt="title" />
-                    </section>
-                    <header class="home-article-header">
-                        <h6>Title</h6>
-                    </header>
-                    <section class="home-article-content">
-                        <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam quisquam impedit repudiandae
-                            praesentium vero sunt sequi voluptate quibusdam quas, numquam harum beatae porro accusamus
-                            rerum.</p>
-                    </section>
-                </section>
-            </a>
-
-            <a href="#">
-                <section class="home-article-card">
-                    <section class="home-article-image">
-                        <img src="../assets/tina-guina-obV_LM0KjxY-unsplash.jpg" alt="title" />
-                    </section>
-                    <header class="home-article-header">
-                        <h6>Title</h6>
-                    </header>
-                    <section class="home-article-content">
-                        <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam quisquam impedit repudiandae
-                            praesentium vero sunt sequi voluptate quibusdam quas, numquam harum beatae porro accusamus
-                            rerum.</p>
-                    </section>
-                </section>
-            </a>
+  <section class="home-wrapper">
+    <h3>From Our Blog</h3>
+    <section class="last-articles">
+      <router-link to="#">
+        <section class="home-article-card">
+          <section class="home-article-image">
+            <img src="../assets/janko-ferlic-h9Iq22JJlGk-unsplash.jpg" alt="title">
+          </section>
+          <header class="home-article-header">
+            <h6>Title</h6>
+          </header>
+          <section class="home-article-content">
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam quisquam impedit repudiandae
+              praesentium vero sunt sequi voluptate quibusdam quas, numquam harum beatae porro accusamus
+              rerum.
+            </p>
+          </section>
         </section>
+      </router-link>
 
-        <h3>From Our Shop</h3>
-        <section class="last-products">
-            <a href="#">
-                <section class="home-coffee-card">
-                    <section class="home-coffee-image">
-                        <img src="../assets/janko-ferlic-h9Iq22JJlGk-unsplash.jpg" alt="title" />
-                    </section>
-                    <header class="home-coffee-header">
-                        <h6>Title</h6>
-                    </header>
-                    <section class="home-coffee-description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ipsam ducimus esse perspiciatis
-                            quae veritatis vel, itaque beatae, deleniti aliquid officia eum ex et cumque asperiores minima.
-                        </p>
-                    </section>
-                </section>
-            </a>
-
-            <a href="#">
-                <section class="home-coffee-card">
-                    <section class="home-coffee-image">
-                        <img src="../assets/mike-kenneally-tNALoIZhqVM-unsplash.jpg" alt="title" />
-                    </section>
-                    <header class="home-coffee-header">
-                        <h6>Title</h6>
-                    </header>
-                    <section class="home-coffee-description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ipsam ducimus esse perspiciatis
-                            quae veritatis vel, itaque beatae, deleniti aliquid officia eum ex et cumque asperiores minima.
-                        </p>
-                    </section>
-                </section>
-            </a>
-
-            <a href="#">
-                <section class="home-coffee-card">
-                    <section class="home-coffee-image">
-                        <img src="../assets/tina-guina-obV_LM0KjxY-unsplash.jpg" alt="title" />
-                    </section>
-                    <header class="home-coffee-header">
-                        <h6>Title</h6>
-                    </header>
-                    <section class="home-coffee-description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ipsam ducimus esse perspiciatis
-                            quae veritatis vel, itaque beatae, deleniti aliquid officia eum ex et cumque asperiores minima.
-                        </p>
-                    </section>
-                </section>
-            </a>
-
+      <router-link to="#">
+        <section class="home-article-card">
+          <section class="home-article-image">
+            <img src="../assets/mike-kenneally-tNALoIZhqVM-unsplash.jpg" alt="title">
+          </section>
+          <header class="home-article-header">
+            <h6>Title</h6>
+          </header>
+          <section class="home-article-content">
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam quisquam impedit repudiandae
+              praesentium vero sunt sequi voluptate quibusdam quas, numquam harum beatae porro accusamus
+              rerum.
+            </p>
+          </section>
         </section>
+      </router-link>
+
+      <router-link to="#">
+        <section class="home-article-card">
+          <section class="home-article-image">
+            <img src="../assets/tina-guina-obV_LM0KjxY-unsplash.jpg" alt="title">
+          </section>
+          <header class="home-article-header">
+            <h6>Title</h6>
+          </header>
+          <section class="home-article-content">
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam quisquam impedit repudiandae
+              praesentium vero sunt sequi voluptate quibusdam quas, numquam harum beatae porro accusamus
+              rerum.
+            </p>
+          </section>
+        </section>
+      </router-link>
     </section>
+
+    <h3>From Our Shop</h3>
+    <section class="last-products">
+      <router-link to="#">
+        <section class="home-coffee-card">
+          <section class="home-coffee-image">
+            <img src="../assets/janko-ferlic-h9Iq22JJlGk-unsplash.jpg" alt="title">
+          </section>
+          <header class="home-coffee-header">
+            <h6>Title</h6>
+          </header>
+          <section class="home-coffee-description">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ipsam ducimus esse perspiciatis
+              quae veritatis vel, itaque beatae, deleniti aliquid officia eum ex et cumque asperiores minima.
+            </p>
+          </section>
+        </section>
+      </router-link>
+
+      <router-link to="#">
+        <section class="home-coffee-card">
+          <section class="home-coffee-image">
+            <img src="../assets/mike-kenneally-tNALoIZhqVM-unsplash.jpg" alt="title">
+          </section>
+          <header class="home-coffee-header">
+            <h6>Title</h6>
+          </header>
+          <section class="home-coffee-description">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ipsam ducimus esse perspiciatis
+              quae veritatis vel, itaque beatae, deleniti aliquid officia eum ex et cumque asperiores minima.
+            </p>
+          </section>
+        </section>
+      </router-link>
+
+      <router-link to="#">
+        <section class="home-coffee-card">
+          <section class="home-coffee-image">
+            <img src="../assets/tina-guina-obV_LM0KjxY-unsplash.jpg" alt="title">
+          </section>
+          <header class="home-coffee-header">
+            <h6>Title</h6>
+          </header>
+          <section class="home-coffee-description">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ipsam ducimus esse perspiciatis
+              quae veritatis vel, itaque beatae, deleniti aliquid officia eum ex et cumque asperiores minima.
+            </p>
+          </section>
+        </section>
+      </router-link>
+    </section>
+  </section>
 </template>
 
 <style scoped>

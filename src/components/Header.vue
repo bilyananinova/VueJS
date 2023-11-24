@@ -6,45 +6,71 @@
   <header class="site-header">
     <section class="header-logo">
       <h1>
-        <a href="/">Coffe Shop</a>
+        <router-link to="/">
+          Coffe Shop
+        </router-link>
       </h1>
+
       <p>VueJS</p>
     </section>
+
     <section>
       <ul class="header-contacts">
         <li><strong>Phone:</strong>+359 888 000 000</li>
         <li><strong>Email:</strong>email@mail.bg</li>
 
         <li class="cart">
-          <a href="/cart">
-            <i class="fas fa-shopping-bag"></i>
+          <router-link to="/cart">
+            <i class="fas fa-shopping-bag" />
             <span class="cart-count">2</span>
-          </a>
+          </router-link>
         </li>
-
       </ul>
     </section>
-
   </header>
 
   <nav class="mainav">
     <div>
-      <a href="/">Home</a>
-      <a href="/coffe-catalog">Shop</a>
-      <a href="/articles">Blog</a>
+      <router-link to="/">
+        Home
+      </router-link>
 
-      <a href="/coffe-catalog/create">Create product</a>
-      <a href="/articles/create">Create article</a>
+      <router-link to="/coffe-catalog">
+        Shop
+      </router-link>
+
+      <router-link to="/articles">
+        Blog
+      </router-link>
+
+      <router-link to="/coffe-catalog/create">
+        Create product
+      </router-link>
+
+      <router-link to="/articles/create">
+        Create article
+      </router-link>
     </div>
+
     <div class="user">
-      <a href="/user/#">Welcome, Pesho!</a>
-      <a href="/logout">Logout</a>
-    </div>
-    <div class="guest">
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
+      <router-link to="/user/#">
+        Welcome, Pesho!
+      </router-link>
+
+      <router-link to="/logout">
+        Logout
+      </router-link>
     </div>
 
+    <div class="guest">
+      <router-link to="/login">
+        Login
+      </router-link>
+
+      <router-link to="/register">
+        Register
+      </router-link>
+    </div>
   </nav>
 </template>
 
