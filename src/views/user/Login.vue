@@ -9,7 +9,7 @@ export default {
     <div class="form-wrapper">
 
         <section class="form-img">
-            <img src="../../assets/brigitte-tohm-yRH0JI2S2KA-unsplash.jpg"
+            <img src="../../assets/login.jpg"
                 alt="" />
         </section>
 

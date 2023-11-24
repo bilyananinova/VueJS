@@ -32,7 +32,7 @@ export default {
         </section>
 
         <section class="form-img">
-            <img src="../../assets/devin-avery-5iRgh_G0eRY-unsplash.jpg"
+            <img src="../../assets/register.jpg"
                 alt="" />
         </section>
 

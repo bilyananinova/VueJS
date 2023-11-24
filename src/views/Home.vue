@@ -115,7 +115,7 @@ export default {
 <style scoped>
 .home-wrapper {
     background: linear-gradient(rgba(0, 0, 0, 0),
-            rgba(0, 0, 0, 0.5)), url('../assets/nordwood-themes-ivP3TYdLvw0-unsplash.jpg') no-repeat;
+            rgba(0, 0, 0, 0.5)), url('../assets/home.jpg') no-repeat;
     background-size: cover;
     padding: 0.5em;
 }

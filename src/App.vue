@@ -19,15 +19,10 @@ export default {
 <template>
   <Header />
   <main class="site-main">
-    <!-- <Home /> -->
+    <Home />
     <!-- <Register /> -->
-    <Login />
+    <!-- <Login /> -->
   </main>
   <Footer />
 </template>
 
-<style>
-.site-main {
-  /* min-height: 70vh; */
-}
-</style>
