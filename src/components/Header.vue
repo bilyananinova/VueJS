@@ -7,7 +7,7 @@
     <section class="header-logo">
       <h1>
         <router-link to="/">
-          Coffe Shop
+          Coffee Shop
         </router-link>
       </h1>
 
