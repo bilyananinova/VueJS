@@ -90,7 +90,9 @@
 
 .header-logo h1 {
   margin-bottom: 0;
-  font-size: 24px;
+  font-size: 2.5em;
+  color: #58DF55;
+  text-shadow: 1px 1px 1px #000000;
 }
 
 .header-logo p {

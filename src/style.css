@@ -10,9 +10,12 @@
 
 :root {
   --main-background: #58DF55;
-  --main-background-shadow: #3a8b38;
+  --main-cards-background: #fff;
+  
   --main-font-color: #302f2f;
   --price-font-color: #337a32;
+
+  --main-shadow-hover: #3a8b38;
   --main-font-color-hover: #fff;
 
   --main-font-color-footer: #fff;
@@ -49,7 +52,7 @@ h4,
 h5,
 h6 {
   font-family: var(--main-font-family-headings);
-  margin-top: 1em;
+  margin: 1em;
   line-height: normal;
   font-weight: normal;
   text-transform: capitalize;

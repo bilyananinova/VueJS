@@ -118,7 +118,7 @@ export default {
 
 .register-form input:focus,
 .register-form input:hover {
-  box-shadow: 0px 0px 5px 1px var(--main-background-shadow);
+  box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
   outline: none;
 }
 
