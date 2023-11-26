@@ -99,6 +99,7 @@
   opacity: 0.7;
   font-size: 0.9rem;
   text-transform: uppercase;
+  margin-left: 3em;
 }
 
 .header-logo h1 a {
@@ -174,5 +175,7 @@
 .guest {
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 </style>
