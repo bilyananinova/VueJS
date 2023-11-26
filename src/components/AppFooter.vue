@@ -77,7 +77,7 @@
     <p>
       Copyright &copy; 2023 - All Rights Reserved -
       <router-link to="/">
-        Coffe Shop VueJS
+        Coffee Shop VueJS
       </router-link>
     </p>
   </section>
