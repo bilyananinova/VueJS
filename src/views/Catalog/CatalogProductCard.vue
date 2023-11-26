@@ -1,0 +1,145 @@
+<script>
+export default {
+  props: {
+    product: {
+      type: Object,
+      requered: true,
+      id: String,
+      name: String,
+      description: String,
+      img: String,
+      price: String,
+    },
+  },
+};
+</script>
+
+<template>
+  <section class="product-card">
+    <div class="product-image">
+      <img :src="product.img" :alt="product.name">
+    </div>
+    <div class="product-details">
+      <header class="product-header">
+        <h5>{{ product.name }}</h5>
+      </header>
+
+      <span class="product-price">{{ product.price }} $</span>
+
+      <p>
+        {{ product.description.substring(0, 350) }}...
+      </p>
+
+      <div class="product-action">
+        <router-link to="details" class="details-btn">
+          <i class="fas fa-wine-bottle" />
+          details
+        </router-link>
+
+        <button class="like-btn">
+          <i class="fas fa-thumbs-up" /><span>5</span>
+        </button>
+
+        <button class="dislike-btn">
+          <i class="fas fa-thumbs-down" /><span>2</span>
+        </button>
+
+        <button class="add-btn">
+          <i class="fas fa-shopping-cart" />add to cart
+        </button>
+
+        <router-link to="edit" class-name="edit-btn">
+          <i class="fas fa-edit" />edit
+        </router-link>
+        <button class="delete-btn">
+          <i class="fas fa-trash-alt" />delete
+        </button>
+      </div>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.product-card {
+    box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.9);
+    border-radius: 0.3em;
+    display: flex;
+    position: relative;
+    margin: 2em 0;
+}
+
+.product-image {
+    flex: 0 0 20%;
+    margin: 1em;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-image img {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: 100%;
+    position: absolute;
+}
+
+.product-image img::after {
+    padding-top: 100%;
+    content: '';
+    display: block;
+}
+
+.product-header h5 {
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.product-details {
+    text-align: left;
+    margin: 0;
+}
+
+.product-details p {
+    padding: 0.5em 2em 0.5em 0;
+}
+
+.product-price {
+    color: var(--price-font-color);
+    font-weight: 600;
+}
+
+.product-action {
+    margin: 1.5em 0;
+}
+
+.product-action i {
+    padding-right: 0.5em;
+}
+
+.product-action button,
+.product-action a {
+    border: 1px solid var(--main-background);
+    padding: 0.5em 0.8em;
+    border-radius: 0.3em;
+    text-transform: uppercase;
+    color: var(--main-font-color);
+    background: var(--main-background);
+    margin-right: 0.8em;
+}
+
+.product-action button:hover,
+.product-action a:hover {
+    color: var(--main-font-color);
+    background: #fff;
+    box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
+}
+
+.like-btn span,
+.dislike-btn span,
+.add-btn,
+.delete-btn {
+    font-family: Verdana, Geneva, sans-serif;
+}
+</style>
