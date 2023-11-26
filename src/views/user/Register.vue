@@ -65,18 +65,6 @@ export default {
 </template>
 
 <style scoped>
-.form-wrapper {
-  display: flex;
-  box-shadow: 0px -1px 37px 0px rgba(0, 0, 0, 0.75);
-  width: 60%;
-  margin: 3em auto 5em;
-}
-
-.form-section {
-  flex: 0 0 50%;
-  position: relative;
-}
-
 .register-form {
   display: flex;
   flex-direction: column;

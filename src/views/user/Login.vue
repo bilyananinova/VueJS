@@ -47,82 +47,69 @@ export default {
 </template>
 
 <style scoped>
-.form-wrapper {
-    display: flex;
-    box-shadow: 0px -1px 37px 0px rgba(0, 0, 0, 0.75);
-    width: 60%;
-    margin: 3em auto 5em;
-}
-
-.form-section {
-    flex: 0 0 50%;
-    position: relative;
-}
-
 .login-form {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    width: 50%;
-    margin: 3em auto;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 50%;
+  margin: 3em auto;
 }
 
 .login-form p {
-    font-family: var(--main-font-family-headings);
+  font-family: var(--main-font-family-headings);
 }
 
 .login-form label {
-    opacity: 0.9;
-    margin: 1.2em 0 0.5em;
+  opacity: 0.9;
+  margin: 1.2em 0 0.5em;
 }
 
 .login-button {
-    margin: 2em 0 1em;
-    padding: 0.5em;
-    font-size: 1.1em;
-    color: var(--main-font-color);
-    border: none;
-    border-radius: 0.5em;
-    background: var(--main-background);
+  margin: 2em 0 1em;
+  padding: 0.5em;
+  font-size: 1.1em;
+  color: var(--main-font-color);
+  border: none;
+  border-radius: 0.5em;
+  background: var(--main-background);
 }
 
 .login-button:hover,
 .login-button:focus {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .login-form input {
-    border: none;
-    border: 1px solid var(--main-background);
-    border-radius: 0.5em;
-    padding: 1em;
+  border: 1px solid var(--main-background);
+  border-radius: 0.5em;
+  padding: 1em;
 }
 
 .login-form input:focus,
 .login-form input:hover {
-    box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
-    outline: none;
+  box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
+  outline: none;
 }
 
 .form-img {
-    display: block;
-    position: relative;
-    overflow: hidden;
-    flex: 0 0 50%;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  flex: 0 0 50%;
 }
 
 .form-img img {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: auto;
-    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: auto;
+  position: absolute;
 }
 
 .form-img img:after {
-    padding-top: 100%;
-    content: '';
-    display: block;
+  padding-top: 100%;
+  content: '';
+  display: block;
 }
 </style>

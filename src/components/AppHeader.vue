@@ -35,7 +35,7 @@
         Home
       </router-link>
 
-      <router-link to="/coffe-catalog">
+      <router-link to="/coffee-catalog">
         Shop
       </router-link>
 
@@ -43,7 +43,7 @@
         Blog
       </router-link>
 
-      <router-link to="/coffe-catalog/create">
+      <router-link to="/coffee-catalog/create">
         Create product
       </router-link>
 
