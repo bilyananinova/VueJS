@@ -1,14 +1,19 @@
 <script>
-import { articles } from '../../constants/articles';
+import { getCollection } from '../../services/articles';
 import BlogArticleCard from './BlogArticleCard.vue';
 
 export default {
   components: { BlogArticleCard },
   data() {
     return {
-      articles,
+      articles: [],
     };
   },
+
+  async created() {
+    this.articles = await getCollection();
+  },
+
 };
 </script>
 
@@ -23,13 +28,13 @@ export default {
 
 <style scoped>
 .blog-wrapper {
-    margin: 3em auto 1em;
-    width: 70%;
+  margin: 3em auto 1em;
+  width: 70%;
 }
 
 .blog {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 </style>

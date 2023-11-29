@@ -13,7 +13,7 @@ export default {
 
     <section class="form-section">
       <form class="login-form">
-        <label htmlFor="login-email">Email address<span class="required">*</span></label>
+        <label for="login-email">Email address<span class="required">*</span></label>
         <input
           id="login-email"
           type="email"
@@ -22,7 +22,7 @@ export default {
           placeholder="ivan@mail.bg"
         >
 
-        <label htmlFor="login-password">Password <span class="required">*</span></label>
+        <label for="login-password">Password <span class="required">*</span></label>
         <input
           id="login-password"
           type="password"
