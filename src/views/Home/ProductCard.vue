@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template>
-  <router-link to="#">
+  <router-link :to="`/coffee-catalog/${product.id}`">
     <section class="home-coffee-card">
       <section class="home-coffee-image">
         <img :src="product.img" :alt="product.name">

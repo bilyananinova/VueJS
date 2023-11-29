@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, limit, orderBy, query } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, limit, orderBy, query, setDoc } from 'firebase/firestore';
 import db from '../firebase/firebase';
 
 export async function getArticlesCollection() {
@@ -28,4 +28,13 @@ export async function getLastArticles() {
 
       return lastArticles;
     });
+}
+
+export async function createArticle(data) {
+  return await setDoc(doc(collection(db, 'articles')), {
+    title: data.title,
+    content: data.content,
+    img: data.img,
+    createdAt: new Date(),
+  });
 }
