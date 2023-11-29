@@ -1,5 +1,5 @@
 <script>
-import { getCollection } from '../../services/articles';
+import { getArticlesCollection } from '../../services/articles';
 import BlogArticleCard from './BlogArticleCard.vue';
 
 export default {
@@ -11,7 +11,7 @@ export default {
   },
 
   async created() {
-    this.articles = await getCollection();
+    this.articles = await getArticlesCollection();
   },
 
 };

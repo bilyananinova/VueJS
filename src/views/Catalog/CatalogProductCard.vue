@@ -31,7 +31,7 @@ export default {
       </p>
 
       <div class="product-action">
-        <router-link to="details" class="details-btn">
+        <router-link :to="`/coffee-catalog/${product.id}`" class="details-btn">
           <i class="fas fa-wine-bottle" />
           details
         </router-link>
@@ -48,7 +48,7 @@ export default {
           <i class="fas fa-shopping-cart" />add to cart
         </button>
 
-        <router-link to="edit" class-name="edit-btn">
+        <router-link to="edit" class="edit-btn">
           <i class="fas fa-edit" />edit
         </router-link>
         <button class="delete-btn">
@@ -61,85 +61,98 @@ export default {
 
 <style scoped>
 .product-card {
-    box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.9);
-    border-radius: 0.3em;
-    display: flex;
-    position: relative;
-    margin: 2em 0;
+  box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.9);
+  border-radius: 0.3em;
+  display: flex;
+  position: relative;
+  margin: 2em 0;
 }
 
 .product-image {
-    flex: 0 0 20%;
-    margin: 1em;
-    display: block;
-    position: relative;
-    overflow: hidden;
+  flex: 0 0 20%;
+  margin: 1em;
+  display: block;
+  position: relative;
+  overflow: hidden;
 }
 
 .product-image img {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: auto;
-    height: 100%;
-    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: 100%;
+  position: absolute;
 }
 
 .product-image img::after {
-    padding-top: 100%;
-    content: '';
-    display: block;
+  padding-top: 100%;
+  content: '';
+  display: block;
 }
 
 .product-header h5 {
-    margin-left: 0;
-    margin-bottom: 0;
+  margin-left: 0;
+  margin-bottom: 0;
 }
 
 .product-details {
-    text-align: left;
-    margin: 0;
+  text-align: left;
+  margin: 0;
 }
 
 .product-details p {
-    padding: 0.5em 2em 0.5em 0;
+  padding: 0.5em 2em 0.5em 0;
 }
 
 .product-price {
-    color: var(--price-font-color);
-    font-weight: 600;
+  color: var(--price-font-color);
+  font-weight: 600;
 }
 
 .product-action {
-    margin: 1.5em 0;
+  margin: 1.5em 0;
 }
 
 .product-action i {
-    padding-right: 0.5em;
+  padding-right: 0.5em;
 }
 
 .product-action button,
 .product-action a {
-    border: 1px solid var(--main-background);
-    padding: 0.5em 0.8em;
-    border-radius: 0.3em;
-    text-transform: uppercase;
-    color: var(--main-font-color);
-    background: var(--main-background);
-    margin-right: 0.8em;
+  border: 1px solid var(--main-background);
+  padding: 0.5em 0.8em;
+  border-radius: 0.3em;
+  text-transform: uppercase;
+  color: var(--main-font-color);
+  background: var(--main-background);
+  margin-right: 0.8em;
 }
 
 .product-action button:hover,
 .product-action a:hover {
-    color: var(--main-font-color);
-    background: #fff;
-    box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
+  color: var(--main-font-color);
+  background: #fff;
+  box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
+}
+
+.product-action .edit-btn:hover {
+  border-color: var(--main-background);
+  background: #ffe600;
+  box-shadow: 0px 0px 5px 1px var(--main-background);
+}
+
+.product-action .delete-btn:hover {
+  border-color: var(--main-background);
+  color: #ffffff;
+  background: #ff0000;
+  box-shadow: 0px 0px 5px 1px var(--main-background);
 }
 
 .like-btn span,
 .dislike-btn span,
 .add-btn,
 .delete-btn {
-    font-family: Verdana, Geneva, sans-serif;
+  font-family: Verdana, Geneva, sans-serif;
 }
 </style>

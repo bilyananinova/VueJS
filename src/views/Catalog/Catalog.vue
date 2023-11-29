@@ -1,13 +1,17 @@
 <script>
-import { products } from '../../constants/products';
+import { getProductsCollection } from '../../services/products';
 import CatalogProductCard from './CatalogProductCard.vue';
 
 export default {
   components: { CatalogProductCard },
   data() {
     return {
-      products,
+      products: [],
     };
+  },
+
+  async created() {
+    this.products = await getProductsCollection();
   },
 };
 </script>

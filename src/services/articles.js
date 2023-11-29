@@ -1,7 +1,7 @@
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import db from '../firebase/firebase';
 
-export async function getCollection() {
+export async function getArticlesCollection() {
   return await getDocs(collection(db, 'articles'))
     .then((snapshot) => {
       const articles = [];
