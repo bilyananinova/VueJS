@@ -32,7 +32,7 @@ export default {
 
       <div class="product-action">
         <router-link :to="`/coffee-catalog/${product.id}`" class="details-btn">
-          <i class="fas fa-wine-bottle" />
+          <i class="fas fa-solid fa-mug-hot" />
           details
         </router-link>
 

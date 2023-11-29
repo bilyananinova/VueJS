@@ -4,8 +4,7 @@ import { getSingleArticle } from '../services/articles';
 
 export default {
   setup() {
-    const route = useRoute();
-    console.log(route);
+    return { route: useRoute() };
   },
   data() {
     return {
