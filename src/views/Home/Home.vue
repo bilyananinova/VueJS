@@ -1,6 +1,6 @@
 <script>
-import { products } from '../../constants/products';
-import { articles } from '../../constants/articles';
+import { getLastProducts } from '../../services/products';
+import { getLastArticles } from '../../services/articles';
 import ProductCard from './ProductCard.vue';
 import ArticleCard from './ArticleCard.vue';
 
@@ -8,9 +8,14 @@ export default {
   components: { ProductCard, ArticleCard },
   data() {
     return {
-      products,
-      articles,
+      products: [],
+      articles: [],
     };
+  },
+
+  async created() {
+    this.products = await getLastProducts();
+    this.articles = await getLastArticles();
   },
 };
 </script>
@@ -40,6 +45,7 @@ export default {
 .home-wrapper h3 {
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 1);
 }
+
 .last-articles,
 .last-products {
   margin: 2em auto 5em;
