@@ -1,6 +1,6 @@
 <script>
 import { useRoute } from 'vue-router';
-import { getSingleProduct } from '../services/products';
+import { deleteProduct, getSingleProduct } from '../services/products';
 
 export default {
   setup() {
@@ -12,10 +12,17 @@ export default {
       id: '',
     };
   },
-
   async created() {
     this.id = this.$route.params.id;
     this.product = (await getSingleProduct(this.id)).data();
+  },
+  methods: {
+    async deleteProd(id) {
+      await deleteProduct(id)
+        .then(() => {
+          this.$router.go(-1);
+        });
+    },
   },
 };
 </script>
@@ -52,7 +59,7 @@ export default {
           edit
         </router-link>
 
-        <button class="delete-btn">
+        <button class="delete-btn" @click="deleteProd(id)">
           <i class="fas fa-trash-alt" />
           delete
         </button>

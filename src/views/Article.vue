@@ -17,9 +17,8 @@ export default {
     this.article = (await getSingleArticle(this.id)).data();
   },
   methods: {
-    async deleteArt() {
-      this.id = this.$route.params.id;
-      await deleteArticle(this.id)
+    async deleteArt(id) {
+      await deleteArticle(id)
         .then(() => {
           this.$router.push({ path: '/articles' });
         });
@@ -47,7 +46,7 @@ export default {
           <i class="fas fa-edit" />
           edit
         </router-link>
-        <button class="delete-article-btn" @click="deleteArt">
+        <button class="delete-article-btn" @click="deleteArt(id)">
           <i class="fas fa-trash-alt" />
           delete
         </button>

@@ -1,4 +1,6 @@
 <script>
+import { deleteProduct } from '../../services/products';
+
 export default {
   props: {
     product: {
@@ -8,7 +10,15 @@ export default {
       name: String,
       description: String,
       img: String,
-      price: String,
+      price: Number,
+    },
+  },
+  methods: {
+    async deleteProd(id) {
+      await deleteProduct(id)
+        .then(() => {
+          this.$router.go(0);
+        });
     },
   },
 };
@@ -51,7 +61,8 @@ export default {
         <router-link to="edit" class="edit-btn">
           <i class="fas fa-edit" />edit
         </router-link>
-        <button class="delete-btn">
+
+        <button class="delete-btn" @click="deleteProd(product.id)">
           <i class="fas fa-trash-alt" />delete
         </button>
       </div>

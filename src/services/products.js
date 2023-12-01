@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, limit, orderBy, query, setDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, setDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
 export async function getProductsCollection() {
@@ -38,4 +38,8 @@ export async function createProduct(data) {
     img: data.img,
     createdAt: new Date(),
   });
+}
+
+export function deleteProduct(id) {
+  return deleteDoc(doc(db, 'products', id));
 }
