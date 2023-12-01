@@ -16,18 +16,18 @@ export default {
 
 <style scoped>
 .container {
-    background: #ff000093;
-    text-align: center;
-    display: inline-block;
-    position: absolute;
-    margin: auto;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 0.3em;
-    padding: 0.8em;
+  background: #ff000093;
+  text-align: center;
+  display: inline-block;
+  position: absolute;
+  /* margin: auto; */
+  right: 0;
+  transform: translateX(-50%);
+  border-radius: 0.3em;
+  padding: 0.8em;
 }
 
 .warning {
-    color: #fff;
+  color: #fff;
 }
 </style>

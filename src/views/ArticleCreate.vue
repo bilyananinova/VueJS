@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     async onSubmit() {
-      if (this.v$.$validate() === false) {
+      if (await this.v$.$validate()) {
         await createArticle(this.formData)
           .then(() => {
             this.$router.push({ path: '/articles' });
@@ -63,9 +63,9 @@ export default {
 </script>
 
 <template>
+  <Error v-if="errors.length > 0" :errors="errors" />
   <h3>Create New Article</h3>
   <div class="form-wrapper create-article">
-    <Error v-if="errors.length > 0" :errors="errors" />
     <section class="form-section create-article-section">
       <form class="create-article-form" @submit.prevent="onSubmit">
         <label for="article-title">Title<span class="required">*</span></label>

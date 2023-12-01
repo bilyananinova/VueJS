@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     async onSubmit() {
-      if (this.v$.$validate()) {
+      if (await this.v$.$validate()) {
         await createProduct(this.formData)
           .then(() =>
             this.$router.push({ path: '/coffee-catalog' }));
@@ -69,9 +69,9 @@ export default {
 </script>
 
 <template>
+  <Error v-if="errors.length" :errors="errors" />
   <h3>Create New Coffee</h3>
   <div class="form-wrapper create-product">
-    <Error v-if="errors.length" :errors="errors" />
     <section class="form-section create-product-section">
       <form class="create-product-form" @submit.prevent="onSubmit">
         <label for="coffee-name">Name<span class="required">*</span></label>
