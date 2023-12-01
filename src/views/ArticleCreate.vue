@@ -1,9 +1,12 @@
 <script>
+import { useVuelidate } from '@vuelidate/core';
+import { helpers, required } from '@vuelidate/validators';
+import Error from '../components/Error.vue';
 import { createArticle } from '../services/articles';
 
 export default {
+  components: { Error },
   props: {
-
     initial: {
       type: Object,
       require: true,
@@ -11,23 +14,50 @@ export default {
       content: '',
       img: '',
       createdAt: '',
-
     },
   },
-
-  emits: ['onSubmit'],
+  setup() {
+    return {
+      v$: useVuelidate(),
+    };
+  },
   data() {
     return {
       formData: { ...this.initial },
+      errors: [],
     };
   },
   methods: {
-    async hanndleSubmit() {
-      this.$emit('onSubmit', this.formData);
-      await createArticle(this.formData).then(() => {
-        this.$router.push({ path: '/articles' });
-      });
+    async onSubmit() {
+      if (this.v$.$validate() === false) {
+        await createArticle(this.formData)
+          .then(() => {
+            this.$router.push({ path: '/articles' });
+          });
+      }
+      else {
+        this.errors = [];
+        this.v$.$errors.forEach((element) => {
+          this.errors.push(element.$message);
+        });
+      }
     },
+  },
+  validations() {
+    return {
+      formData: {
+        title: {
+          required: helpers.withMessage('Title is requred!', required),
+        },
+        content: {
+          required: helpers.withMessage('Content is requred!', required),
+        },
+        img: {
+          required: helpers.withMessage('Image is requred!', required),
+          URL,
+        },
+      },
+    };
   },
 };
 </script>
@@ -35,8 +65,9 @@ export default {
 <template>
   <h3>Create New Article</h3>
   <div class="form-wrapper create-article">
+    <Error v-if="errors.length > 0" :errors="errors" />
     <section class="form-section create-article-section">
-      <form class="create-article-form" @submit.prevent="hanndleSubmit">
+      <form class="create-article-form" @submit.prevent="onSubmit">
         <label for="article-title">Title<span class="required">*</span></label>
         <input
           id="article-title"
@@ -72,12 +103,12 @@ export default {
 <style scoped>
 .create-article {
   box-shadow: 0px -1px 7px 0px rgba(0, 0, 0, 0.9);
-  width: 50%;
+  width: 55%;
 }
 
 .create-article-section {
-  margin: auto;
-  padding: 3em 1em;
+  margin: 1em auto;
+  padding: 3em 0;
 }
 
 .create-article-form {

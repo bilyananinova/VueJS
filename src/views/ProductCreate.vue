@@ -13,15 +13,13 @@ export default {
       createdAt: '',
     },
   },
-  emits: ['onSubmit'],
   data() {
     return {
       formData: { ...this.initial },
     };
   },
   methods: {
-    async handleSubmit() {
-      this.$emit('onSubmit', this.formData);
+    async onSubmit() {
       await createProduct(this.formData)
         .then(() =>
           this.$router.push({ path: '/coffee-catalog' }));
@@ -34,7 +32,7 @@ export default {
   <h3>Create New Coffee</h3>
   <div class="form-wrapper create-product">
     <section class="form-section create-product-section">
-      <form class="create-product-form" @submit.prevent="handleSubmit">
+      <form class="create-product-form" @submit.prevent="onSubmit">
         <label for="coffee-name">Name<span class="required">*</span></label>
         <input
           id="coffee-name"
