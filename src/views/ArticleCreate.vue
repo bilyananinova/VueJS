@@ -6,16 +6,6 @@ import { createArticle } from '../services/articles';
 
 export default {
   components: { Error },
-  props: {
-    initial: {
-      type: Object,
-      require: true,
-      title: '',
-      content: '',
-      img: '',
-      createdAt: '',
-    },
-  },
   setup() {
     return {
       v$: useVuelidate(),
@@ -23,7 +13,12 @@ export default {
   },
   data() {
     return {
-      formData: { ...this.initial },
+      formData: {
+        title: '',
+        content: '',
+        img: '',
+        createdAt: '',
+      },
       errors: [],
     };
   },
@@ -103,7 +98,7 @@ export default {
 <style scoped>
 .create-article {
   box-shadow: 0px -1px 7px 0px rgba(0, 0, 0, 0.9);
-  width: 55%;
+  width: 50%;
 }
 
 .create-article-section {

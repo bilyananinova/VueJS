@@ -6,17 +6,6 @@ import Error from '../components/Error.vue';
 
 export default {
   components: { Error },
-  props: {
-    initial: {
-      type: Object,
-      required: true,
-      name: '',
-      description: '',
-      price: 0,
-      img: '',
-      createdAt: '',
-    },
-  },
   setup() {
     return {
       v$: useVuelidate(),
@@ -24,7 +13,13 @@ export default {
   },
   data() {
     return {
-      formData: { ...this.initial },
+      formData: {
+        name: '',
+        description: '',
+        price: 0,
+        img: '',
+        createdAt: '',
+      },
       errors: [],
     };
   },
@@ -40,8 +35,6 @@ export default {
         this.v$.$errors.forEach((element) => {
           this.errors.push(element.$message);
         });
-
-        this.errors.map(e => e !== '');
       }
     },
   },
@@ -56,7 +49,7 @@ export default {
         },
         price: {
           required: helpers.withMessage('Price is required!', required),
-          decimal: helpers.withMessage('Price must be decimal value!', decimal),
+          decimal: helpers.withMessage('Price must be a decimal value!', decimal),
         },
         img: {
           required: helpers.withMessage('Image is required!', required),
@@ -117,7 +110,7 @@ export default {
 <style scoped>
 .create-product {
   box-shadow: 0px -1px 7px 0px rgba(0, 0, 0, 0.9);
-  width: 55%;
+  width: 50%;
 }
 
 .create-product-section {

@@ -14,16 +14,6 @@ function sameAsHelpers(password) {
 
 export default {
   components: { Error },
-  props: {
-    initial: {
-      type: Object,
-      required: true,
-      name: '',
-      email: '',
-      password: '',
-      repeatPass: '',
-    },
-  },
   setup() {
     return {
       v$: useVuelidate(),
@@ -31,8 +21,13 @@ export default {
   },
   data() {
     return {
-      formData: { ...this.initial },
       errors: [],
+      formData: {
+        name: '',
+        email: '',
+        password: '',
+        repeatPass: '',
+      },
     };
   },
   methods: {

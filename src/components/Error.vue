@@ -20,9 +20,9 @@ export default {
   text-align: center;
   display: inline-block;
   position: absolute;
-  /* margin: auto; */
-  left: -50%;
-  transform: translateX(-50%);
+  margin: auto;
+  left: 0;
+  transform: translateX(50%);
   border-radius: 0.3em;
   padding: 0.8em;
 }

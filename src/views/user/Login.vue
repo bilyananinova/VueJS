@@ -17,10 +17,11 @@ export default {
   },
   data() {
     return {
-      formData: { ...this.initial },
       errors: [],
-      email: '',
-      password: '',
+      formData: {
+        email: '',
+        password: '',
+      },
     };
   },
 
