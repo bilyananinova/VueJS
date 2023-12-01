@@ -1,6 +1,6 @@
 <script>
 import { useRoute } from 'vue-router';
-import { getSingleArticle } from '../services/articles';
+import { deleteArticle, getSingleArticle } from '../services/articles';
 
 export default {
   setup() {
@@ -15,6 +15,15 @@ export default {
   async created() {
     this.id = this.$route.params.id;
     this.article = (await getSingleArticle(this.id)).data();
+  },
+  methods: {
+    async deleteArt() {
+      this.id = this.$route.params.id;
+      await deleteArticle(this.id)
+        .then(() => {
+          this.$router.push({ path: '/articles' });
+        });
+    },
   },
 };
 </script>
@@ -38,7 +47,7 @@ export default {
           <i class="fas fa-edit" />
           edit
         </router-link>
-        <button class="delete-article-btn">
+        <button class="delete-article-btn" @click="deleteArt">
           <i class="fas fa-trash-alt" />
           delete
         </button>
@@ -89,6 +98,10 @@ export default {
   padding-top: 56.25%;
   display: block;
   content: '';
+}
+
+.blog-article-content {
+  white-space: pre-wrap;
 }
 
 .article-actions {
