@@ -160,7 +160,6 @@ export default {
   font-size: 1.1em;
   color: var(--main-font-color);
   font-weight: 700;
-  ;
   border: none;
   border-radius: 0.5em;
   background: var(--main-background);

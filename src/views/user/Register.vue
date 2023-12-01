@@ -1,6 +1,55 @@
 <script>
-export default {
+import { email, helpers, required, sameAs } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+import { register } from '../../services/auth';
 
+export default {
+  props: {
+    initial: {
+      type: Object,
+      name: '',
+      email: '',
+      password: '',
+      repeatPass: '',
+    },
+  },
+  setup() {
+    return {
+      v$: useVuelidate(),
+    };
+  },
+  data() {
+    return {
+      formData: { ...this.initial },
+    };
+  },
+  methods: {
+    async onSubmit() {
+      const { name, email, password } = this.formData;
+      await register(name, email, password)
+        .then(() =>
+          this.$router.push({ path: '/' }));
+    },
+  },
+  validations() {
+    return {
+      formData: {
+        name: { required: helpers.withMessage('Name is required!', required) },
+        email: {
+          required: helpers.withMessage('Email is required!', required),
+          email: helpers.withMessage('Email', email),
+        },
+        password: {
+          required: helpers.withMessage('Password is required!', required),
+          minLength: (6),
+        },
+        repeatPass: {
+          required: helpers.withMessage('Repeat password is required!', required),
+          samePass: sameAs(this.password),
+        },
+      },
+    };
+  },
 };
 </script>
 
@@ -8,10 +57,11 @@ export default {
   <h3>Registration Page</h3>
   <section class="form-wrapper">
     <section class="form-section">
-      <form class="register-form">
+      <form class="register-form" @submit.prevent="onSubmit">
         <label for="register-name">Name <span class="required">*</span></label>
         <input
           id="register-name"
+          v-model="formData.name"
           type="text"
           class="form-input"
           name="name"
@@ -21,6 +71,7 @@ export default {
         <label for="register-email">Email address<span class="required">*</span></label>
         <input
           id="register-email"
+          v-model="formData.email"
           type="email"
           class="form-input"
           name="email"
@@ -30,6 +81,7 @@ export default {
         <label for="register-password">Password <span class="required">*</span></label>
         <input
           id="register-password"
+          v-model="formData.password"
           type="password"
           class="form-input"
           name="password"
@@ -39,6 +91,7 @@ export default {
         <label for="register-repeat-password">Repeat Password <span class="required">*</span></label>
         <input
           id="register-repeat-password"
+          v-model="formData.repeatPass"
           type="password"
           class="form-input"
           name="rePassword"

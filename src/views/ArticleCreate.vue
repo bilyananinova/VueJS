@@ -1,6 +1,6 @@
 <script>
 import { useVuelidate } from '@vuelidate/core';
-import { helpers, required } from '@vuelidate/validators';
+import { helpers, required, url } from '@vuelidate/validators';
 import Error from '../components/Error.vue';
 import { createArticle } from '../services/articles';
 
@@ -53,8 +53,8 @@ export default {
           required: helpers.withMessage('Content is requred!', required),
         },
         img: {
-          required: helpers.withMessage('Image is requred!', required),
-          URL,
+          required: helpers.withMessage('Image is required!', required),
+          url: helpers.withMessage('Image must be a valid URL address!', url),
         },
       },
     };
