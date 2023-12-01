@@ -1,10 +1,66 @@
 <script>
-export default {
+import { email, helpers, minLength, required } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+import { login } from '../../services/auth';
+import Error from '../../components/Error.vue';
 
+function minLengthHelpers(number) {
+  return helpers.withMessage(`Password must be ${number} characters long!`, minLength(number));
+}
+
+export default {
+  components: { Error },
+  setup() {
+    return {
+      v$: useVuelidate(),
+    };
+  },
+  data() {
+    return {
+      formData: { ...this.initial },
+      errors: [],
+      email: '',
+      password: '',
+    };
+  },
+
+  methods: {
+    async onSubmit() {
+      console.log(this.formData);
+      if (await this.v$.$validate()) {
+        const { email, password } = this.formData;
+        await login(email, password)
+          .then(() =>
+            this.$router.push({ path: '/' }));
+      }
+      else {
+        this.errors = [];
+        this.v$.$errors.forEach((element) => {
+          this.errors.push(element.$message);
+        });
+      }
+    },
+  },
+  validations() {
+    return {
+      formData: {
+        email: {
+          required: helpers.withMessage('Email is required!', required),
+          email: helpers.withMessage('Email must be a valid email address!', email),
+        },
+        password: {
+          required: helpers.withMessage('Password is required!', required),
+          minLength: minLengthHelpers(6),
+        },
+      },
+    };
+  },
 };
 </script>
 
 <template>
+  <Error v-if="errors.length > 0" :errors="errors" />
+
   <h3>Login Page</h3>
   <div class="form-wrapper">
     <section class="form-img">
@@ -12,10 +68,11 @@ export default {
     </section>
 
     <section class="form-section">
-      <form class="login-form">
+      <form class="login-form" @submit.prevent="onSubmit">
         <label for="login-email">Email address<span class="required">*</span></label>
         <input
           id="login-email"
+          v-model="formData.email"
           type="email"
           class="form-input"
           name="email"
@@ -25,6 +82,7 @@ export default {
         <label for="login-password">Password <span class="required">*</span></label>
         <input
           id="login-password"
+          v-model="formData.password"
           type="password"
           class="form-input"
           name="password"

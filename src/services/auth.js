@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase/firebase';
 
@@ -11,6 +11,15 @@ export function register(name, email, password) {
           email: resp.user.email,
         });
 
+        return resp.user.currentUser;
+      }
+    });
+}
+
+export function login(email, password) {
+  return signInWithEmailAndPassword(auth, email, password)
+    .then((resp) => {
+      if (resp) {
         return resp.user.currentUser;
       }
     });
