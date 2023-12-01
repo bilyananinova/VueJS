@@ -1,7 +1,11 @@
 <script>
+import { decimal, helpers, required, url } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
 import { createProduct } from '../services/products';
+import Error from '../components/Error.vue';
 
 export default {
+  components: { Error },
   props: {
     initial: {
       type: Object,
@@ -13,17 +17,53 @@ export default {
       createdAt: '',
     },
   },
+  setup() {
+    return {
+      v$: useVuelidate(),
+    };
+  },
   data() {
     return {
       formData: { ...this.initial },
+      errors: [],
     };
   },
   methods: {
     async onSubmit() {
-      await createProduct(this.formData)
-        .then(() =>
-          this.$router.push({ path: '/coffee-catalog' }));
+      if (this.v$.$validate()) {
+        await createProduct(this.formData)
+          .then(() =>
+            this.$router.push({ path: '/coffee-catalog' }));
+      }
+      else {
+        this.errors = [];
+        this.v$.$errors.forEach((element) => {
+          this.errors.push(element.$message);
+        });
+
+        this.errors.map(e => e !== '');
+      }
     },
+  },
+  validations() {
+    return {
+      formData: {
+        name: {
+          required: helpers.withMessage('Name is required!', required),
+        },
+        description: {
+          required: helpers.withMessage('Description is required!', required),
+        },
+        price: {
+          required: helpers.withMessage('Price is required!', required),
+          decimal: helpers.withMessage('Price must be decimal value!', decimal),
+        },
+        img: {
+          required: helpers.withMessage('Image is required!', required),
+          url: helpers.withMessage('Image must be a valid URL address!', url),
+        },
+      },
+    };
   },
 };
 </script>
@@ -31,6 +71,7 @@ export default {
 <template>
   <h3>Create New Coffee</h3>
   <div class="form-wrapper create-product">
+    <Error v-if="errors.length" :errors="errors" />
     <section class="form-section create-product-section">
       <form class="create-product-form" @submit.prevent="onSubmit">
         <label for="coffee-name">Name<span class="required">*</span></label>
@@ -76,12 +117,12 @@ export default {
 <style scoped>
 .create-product {
   box-shadow: 0px -1px 7px 0px rgba(0, 0, 0, 0.9);
-  width: 50%;
+  width: 55%;
 }
 
 .create-product-section {
-  margin: auto;
-  padding: 3em 1em;
+  margin: 1em auto;
+  padding: 3em 0;
 }
 
 .create-product-form {
