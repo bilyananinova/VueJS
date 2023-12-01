@@ -1,12 +1,23 @@
 <script>
-import { email, helpers, required, sameAs } from '@vuelidate/validators';
+import { email, helpers, minLength, required, sameAs } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import { register } from '../../services/auth';
+import Error from '../../components/Error.vue';
+
+function minLengthHelpers(number) {
+  return helpers.withMessage(`Password must be ${number} characters long!`, minLength(number));
+}
+
+function sameAsHelpers(password) {
+  return helpers.withMessage('Password missmatch!', sameAs(password));
+}
 
 export default {
+  components: { Error },
   props: {
     initial: {
       type: Object,
+      required: true,
       name: '',
       email: '',
       password: '',
@@ -21,14 +32,23 @@ export default {
   data() {
     return {
       formData: { ...this.initial },
+      errors: [],
     };
   },
   methods: {
     async onSubmit() {
-      const { name, email, password } = this.formData;
-      await register(name, email, password)
-        .then(() =>
-          this.$router.push({ path: '/' }));
+      if (await this.v$.$validate()) {
+        const { name, email, password } = this.formData;
+        await register(name, email, password)
+          .then(() =>
+            this.$router.push({ path: '/' }));
+      }
+      else {
+        this.errors = [];
+        this.v$.$errors.forEach((element) => {
+          this.errors.push(element.$message);
+        });
+      }
     },
   },
   validations() {
@@ -37,15 +57,15 @@ export default {
         name: { required: helpers.withMessage('Name is required!', required) },
         email: {
           required: helpers.withMessage('Email is required!', required),
-          email: helpers.withMessage('Email', email),
+          email: helpers.withMessage('Email must be a valid email address!', email),
         },
         password: {
           required: helpers.withMessage('Password is required!', required),
-          minLength: (6),
+          minLength: minLengthHelpers(6),
         },
         repeatPass: {
           required: helpers.withMessage('Repeat password is required!', required),
-          samePass: sameAs(this.password),
+          sameAs: sameAsHelpers(this.formData.password),
         },
       },
     };
@@ -54,6 +74,7 @@ export default {
 </script>
 
 <template>
+  <Error v-if="errors.length > 0" :errors="errors" />
   <h3>Registration Page</h3>
   <section class="form-wrapper">
     <section class="form-section">
