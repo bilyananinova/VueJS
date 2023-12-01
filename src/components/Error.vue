@@ -21,7 +21,7 @@ export default {
   display: inline-block;
   position: absolute;
   /* margin: auto; */
-  right: 0;
+  left: -50%;
   transform: translateX(-50%);
   border-radius: 0.3em;
   padding: 0.8em;
