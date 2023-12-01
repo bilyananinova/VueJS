@@ -1,5 +1,5 @@
 import { collection, doc, getDoc, getDocs, limit, orderBy, query, setDoc } from 'firebase/firestore';
-import db from '../firebase/firebase';
+import { db } from '../firebase/firebase';
 
 export async function getArticlesCollection() {
   return await getDocs(collection(db, 'articles'))
