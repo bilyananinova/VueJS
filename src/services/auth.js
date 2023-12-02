@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase/firebase';
 
 export function register(name, email, password) {
@@ -18,9 +18,11 @@ export function register(name, email, password) {
 
 export function login(email, password) {
   return signInWithEmailAndPassword(auth, email, password)
-    .then((resp) => {
-      if (resp) {
-        return resp.user.currentUser;
-      }
+    .then(async (resp) => {
+      return resp.user.uid;
     });
+}
+
+export async function getUser(id) {
+  return (await getDoc(doc(db, 'users', id))).data();
 }
