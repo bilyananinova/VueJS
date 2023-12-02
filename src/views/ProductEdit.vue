@@ -7,17 +7,18 @@ import Error from '../components/Error.vue';
 export default {
   components: { Error },
   setup() {
-    return { v$: useVuelidate() };
+    return {
+      v$: useVuelidate(),
+    };
   },
   data() {
     return {
       product: {},
-      id: '',
+      id: this.$route.params.id,
       errors: [],
     };
   },
   async created() {
-    this.id = this.$route.params.id;
     this.product = (await getSingleProduct(this.id)).data();
   },
   methods: {
@@ -32,7 +33,6 @@ export default {
         this.v$.$errors.forEach((element) => {
           this.errors.push(element.$message);
         });
-        console.log(this.errors);
       }
     },
   },

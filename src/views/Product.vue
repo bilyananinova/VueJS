@@ -9,11 +9,10 @@ export default {
   data() {
     return {
       product: {},
-      id: '',
+      id: this.$route.params.id,
     };
   },
   async created() {
-    this.id = this.$route.params.id;
     this.product = (await getSingleProduct(this.id)).data();
   },
   methods: {

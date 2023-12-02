@@ -1,19 +1,14 @@
 <script>
-import { useRoute } from 'vue-router';
 import { deleteArticle, getSingleArticle } from '../services/articles';
 
 export default {
-  setup() {
-    return { route: useRoute() };
-  },
   data() {
     return {
       article: {},
-      id: '',
+      id: this.$route.params.id,
     };
   },
   async created() {
-    this.id = this.$route.params.id;
     this.article = (await getSingleArticle(this.id)).data();
   },
   methods: {
