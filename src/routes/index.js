@@ -5,6 +5,7 @@ import Home from '../views/Home/Home.vue';
 import Catalog from '../views/Catalog/Catalog.vue';
 import Product from '../views/Product.vue';
 import ProductCreate from '../views/ProductCreate.vue';
+import ProductEdit from '../views/ProductEdit.vue';
 
 import Blog from '../views/Blog/Blog.vue';
 import Article from '../views/Article.vue';
@@ -17,9 +18,10 @@ const routes = [
   { path: '/', component: Home },
   { path: '/login', component: Login },
   { path: '/register', component: Register },
-  { path: '/coffee-catalog', component: Catalog },
-  { path: '/coffee-catalog/:id', component: Product },
   { path: '/coffee-catalog/create', component: ProductCreate },
+  { path: '/coffee-catalog', component: Catalog },
+  { path: '/coffee-catalog/:id/edit', component: ProductEdit },
+  { path: '/coffee-catalog/:id', component: Product },
   { path: '/articles', component: Blog },
   { path: '/articles/:id', component: Article },
   { path: '/articles/create', component: ArticleCreate },

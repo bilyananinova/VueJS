@@ -1,46 +1,44 @@
 <script>
-import { decimal, helpers, required, url } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import { createProduct } from '../services/products';
+import { decimal, helpers, required, url } from '@vuelidate/validators';
+import { getSingleProduct, updateProduct } from '../services/products';
 import Error from '../components/Error.vue';
 
 export default {
   components: { Error },
   setup() {
-    return {
-      v$: useVuelidate(),
-    };
+    return { v$: useVuelidate() };
   },
   data() {
     return {
-      formData: {
-        name: '',
-        description: '',
-        price: '',
-        img: '',
-        createdAt: '',
-      },
+      product: {},
+      id: '',
       errors: [],
     };
+  },
+  async created() {
+    this.id = this.$route.params.id;
+    this.product = (await getSingleProduct(this.id)).data();
   },
   methods: {
     async onSubmit() {
       if (await this.v$.$validate()) {
-        await createProduct(this.formData)
+        await updateProduct(this.id, this.product.name, this.product.description, this.product.price, this.product.img)
           .then(() =>
-            this.$router.push({ path: '/coffee-catalog' }));
+            this.$router.push({ path: `/coffee-catalog/${this.id}` }));
       }
       else {
         this.errors = [];
         this.v$.$errors.forEach((element) => {
           this.errors.push(element.$message);
         });
+        console.log(this.errors);
       }
     },
   },
   validations() {
     return {
-      formData: {
+      product: {
         name: {
           required: helpers.withMessage('Name is required!', required),
         },
@@ -63,14 +61,14 @@ export default {
 
 <template>
   <Error v-if="errors.length" :errors="errors" />
-  <h3>Create New Coffee</h3>
-  <div class="form-wrapper create-product">
-    <section class="form-section create-product-section">
-      <form class="create-product-form" @submit.prevent="onSubmit">
+  <h3>Edit Coffee</h3>
+  <div class="form-wrapper edit-product">
+    <section class="form-section edit-product-section">
+      <form class="edit-product-form" @submit.prevent="onSubmit">
         <label for="coffee-name">Name<span class="required">*</span></label>
         <input
-          id="coffee-name"
-          v-model="formData.name"
+          id="coffe-name"
+          v-model="product.name"
           type="text"
           class="form-input"
           name="name"
@@ -78,7 +76,7 @@ export default {
         <label for="coffee-description">Description<span class="required">*</span></label>
         <textarea
           id="coffee-description"
-          v-model="formData.description"
+          v-model="product.description"
           cols="50"
           rows="5"
           name="description"
@@ -86,7 +84,7 @@ export default {
         <label for="coffee-price">Price<span class="required">*</span></label>
         <input
           id="coffee-price"
-          v-model="formData.price"
+          v-model="product.price"
           type="text"
           class="form-input"
           name="price"
@@ -94,13 +92,13 @@ export default {
         <label for="coffee-img">Image<span class="required">*</span></label>
         <input
           id="coffee-img"
-          v-model="formData.img"
+          v-model="product.img"
           type="text"
           class="form-input"
-          name="img"
+          name="image"
         >
-        <button type="submit" class="create-product-button">
-          Create
+        <button type="submit" class="edit-product-button">
+          Edit
         </button>
       </form>
     </section>
@@ -108,46 +106,45 @@ export default {
 </template>
 
 <style scoped>
-.create-product {
+.edit-product {
   box-shadow: 0px -1px 7px 0px rgba(0, 0, 0, 0.9);
   width: 50%;
 }
 
-.create-product-section {
+.edit-product-section {
   margin: 1em auto;
   padding: 3em 0;
 }
 
-.create-product-form {
+.edit-product-form {
   display: flex;
   flex-direction: column;
   text-align: left;
 }
 
-.create-product-form label {
+.edit-product-form label {
   font-size: 1.2em;
   font-weight: 700;
   padding: 1em 0 0.3em;
-
 }
 
-.create-product-form input,
-.create-product-form textarea {
+.edit-product-form input,
+.edit-product-form textarea {
   border: none;
   border: 1px solid var(--main-background);
   border-radius: 0.5em;
   padding: 0.5em;
 }
 
-.create-product-form input:focus,
-.create-product-form input:hover,
-.create-product-form textarea:focus,
-.create-product-form textarea:hover {
+.edit-product-form input:focus,
+.edit-product-form input:hover,
+.edit-product-form textarea:focus,
+.edit-product-form textarea:hover {
   box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
   outline: none;
 }
 
-.create-product-button {
+.edit-product-button {
   margin: 2em 0 0.5em;
   padding: 0.5em;
   font-size: 1.1em;
@@ -158,8 +155,8 @@ export default {
   background: var(--main-background);
 }
 
-.create-product-button:hover,
-.create-product-button:focus {
+.edit-product-button:hover,
+.edit-product-button:focus {
   cursor: pointer;
 }
 </style>

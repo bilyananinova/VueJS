@@ -58,7 +58,7 @@ export default {
           <i class="fas fa-shopping-cart" />add to cart
         </button>
 
-        <router-link to="edit" class="edit-btn">
+        <router-link :to="`/coffee-catalog/${product.id}/edit`" class="edit-btn">
           <i class="fas fa-edit" />edit
         </router-link>
 
