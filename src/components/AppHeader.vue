@@ -1,4 +1,5 @@
 <script>
+import { logout } from '../services/auth';
 import { useUserStore } from '../stores/user';
 
 export default {
@@ -6,6 +7,14 @@ export default {
     return {
       userStore: useUserStore(),
     };
+  },
+
+  method: {
+    async logoutUser() {
+      await logout();
+      this.userStore.clearStorage();
+      this.$router.go(0);
+    },
   },
 };
 </script>
@@ -65,7 +74,7 @@ export default {
         Welcome, {{ userStore.profile.name }}!
       </router-link>
 
-      <router-link to="/logout">
+      <router-link to="/" @click="logoutUser">
         Logout
       </router-link>
     </div>
