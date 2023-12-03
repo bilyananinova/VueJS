@@ -17,10 +17,8 @@ export default {
   },
   methods: {
     async deleteProd(id) {
-      await deleteProduct(id)
-        .then(() => {
-          this.$router.go(-1);
-        });
+      await deleteProduct(id);
+      this.$router.go(-1);
     },
   },
 };

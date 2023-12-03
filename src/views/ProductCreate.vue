@@ -26,9 +26,11 @@ export default {
   methods: {
     async onSubmit() {
       if (await this.v$.$validate()) {
-        await createProduct(this.formData)
-          .then(() =>
-            this.$router.push({ path: '/coffee-catalog' }));
+        const product = await createProduct(this.formData);
+
+        if (product) {
+          this.$router.push({ path: '/coffee-catalog' });
+        }
       }
       else {
         this.errors = [];

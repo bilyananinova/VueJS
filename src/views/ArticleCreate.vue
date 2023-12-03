@@ -25,10 +25,11 @@ export default {
   methods: {
     async onSubmit() {
       if (await this.v$.$validate()) {
-        await createArticle(this.formData)
-          .then(() => {
-            this.$router.push({ path: '/articles' });
-          });
+        const article = await createArticle(this.formData);
+
+        if (article) {
+          this.$router.push({ path: '/articles' });
+        }
       }
       else {
         this.errors = [];

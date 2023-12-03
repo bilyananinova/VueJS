@@ -34,9 +34,11 @@ export default {
     async onSubmit() {
       if (await this.v$.$validate()) {
         const { name, email, password } = this.formData;
-        await register(name, email, password)
-          .then(() =>
-            this.$router.push({ path: '/' }));
+        const user = await register(name, email, password);
+
+        if (user) {
+          this.$router.push({ path: '/' });
+        }
       }
       else {
         this.errors = [];

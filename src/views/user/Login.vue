@@ -32,13 +32,11 @@ export default {
       if (await this.v$.$validate()) {
         const { email, password } = this.formData;
         const userId = await login(email, password);
-        await getUser(userId)
-          .then((user) => {
-            this.userStore.isAuth = true;
-            this.userStore.setAdmin(userId);
-            this.userStore.setProfile({ ...user, id: userId });
-            this.$router.push({ path: '/' });
-          });
+        const user = await getUser(userId);
+        this.userStore.isAuth = true;
+        this.userStore.setAdmin(userId);
+        this.userStore.setProfile({ ...user, id: userId });
+        this.$router.push({ path: '/' });
       }
       else {
         this.errors = [];

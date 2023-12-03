@@ -13,10 +13,8 @@ export default {
   },
   methods: {
     async deleteArt(id) {
-      await deleteArticle(id)
-        .then(() => {
-          this.$router.push({ path: '/articles' });
-        });
+      await deleteArticle(id);
+      this.$router.push({ path: '/articles' });
     },
   },
 };

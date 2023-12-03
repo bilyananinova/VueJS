@@ -24,9 +24,11 @@ export default {
   methods: {
     async onSubmit() {
       if (await this.v$.$validate()) {
-        await updateProduct(this.id, this.product.name, this.product.description, this.product.price, this.product.img)
-          .then(() =>
-            this.$router.push({ path: `/coffee-catalog/${this.id}` }));
+        const product = await updateProduct(this.id, this.product.name, this.product.description, this.product.price, this.product.img);
+
+        if (product) {
+          this.$router.push({ path: `/coffee-catalog/${this.id}` });
+        }
       }
       else {
         this.errors = [];

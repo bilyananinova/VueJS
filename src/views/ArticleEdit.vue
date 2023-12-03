@@ -24,9 +24,11 @@ export default {
   methods: {
     async onSubmit() {
       if (await this.v$.$validate()) {
-        await updateArticle(this.id, this.article.title, this.article.content, this.article.img)
-          .then(() =>
-            this.$router.push({ path: `/articles/${this.id}` }));
+        const article = await updateArticle(this.id, this.article.title, this.article.content, this.article.img);
+
+        if (article) {
+          this.$router.push({ path: `/articles/${this.id}` });
+        }
       }
       else {
         this.errors = [];
