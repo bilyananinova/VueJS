@@ -4,13 +4,14 @@ import { auth, db } from '../firebase/firebase';
 
 export async function register(name, email, password) {
   const resp = await createUserWithEmailAndPassword(auth, email, password);
-  if (resp) {
+  if (resp.user.uid) {
     setDoc(doc(db, 'users', resp.user.uid), {
       name,
       email: resp.user.email,
+      cart: [],
     });
 
-    return resp.user.currentUser;
+    return resp.user.uid;
   }
 }
 
@@ -20,7 +21,7 @@ export async function login(email, password) {
 }
 
 export async function logout() {
-  return await signOut(auth);
+  await signOut(auth);
 }
 
 export async function getUser(id) {

@@ -33,10 +33,13 @@ export default {
         const { email, password } = this.formData;
         const userId = await login(email, password);
         const user = await getUser(userId);
-        this.userStore.isAuth = true;
-        this.userStore.setAdmin(userId);
-        this.userStore.setProfile({ ...user, id: userId });
-        this.$router.push({ path: '/' });
+
+        if (user) {
+          this.userStore.isAuth = true;
+          this.userStore.setAdmin(userId);
+          this.userStore.setProfile({ ...user, id: userId });
+          this.$router.push({ path: '/' });
+        }
       }
       else {
         this.errors = [];

@@ -1,7 +1,8 @@
 <script>
 import { email, helpers, minLength, required, sameAs } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import { register } from '../../services/auth';
+import { getUser, register } from '../../services/auth';
+import { useUserStore } from '../../stores/user';
 import Error from '../../components/Error.vue';
 
 function minLengthHelpers(number) {
@@ -17,6 +18,7 @@ export default {
   setup() {
     return {
       v$: useVuelidate(),
+      userStore: useUserStore(),
     };
   },
   data() {
@@ -34,9 +36,13 @@ export default {
     async onSubmit() {
       if (await this.v$.$validate()) {
         const { name, email, password } = this.formData;
-        const user = await register(name, email, password);
+        const userId = await register(name, email, password);
+        const user = await getUser(userId);
 
         if (user) {
+          this.userStore.isAuth = true;
+          this.userStore.setAdmin(userId);
+          this.userStore.setProfile({ ...user, id: userId });
           this.$router.push({ path: '/' });
         }
       }
