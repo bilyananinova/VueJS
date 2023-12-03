@@ -19,5 +19,12 @@ export const useUserStore = defineStore('user', {
         this.isAdmin = true;
       }
     },
+    clearStorage() {
+      this.profile = null;
+      this.isAdmin = false;
+      this.isAuth = false;
+      sessionStorage.removeItem('user');
+      sessionStorage.clear();
+    },
   },
 });
