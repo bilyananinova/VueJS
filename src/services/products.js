@@ -2,15 +2,12 @@ import { collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, set
 import { db } from '../firebase/firebase';
 
 export async function getProductsCollection() {
-  return await getDocs(collection(db, 'products'))
-    .then((snapshot) => {
-      const products = [];
-      snapshot.docs.forEach((doc) => {
-        products.push({ ...doc.data(), id: doc.id });
-      });
-
-      return products;
-    });
+  const snapshot = await getDocs(collection(db, 'products'));
+  const products = [];
+  snapshot.docs.forEach((doc) => {
+    products.push({ ...doc.data(), id: doc.id });
+  });
+  return products;
 }
 
 export async function getSingleProduct(id) {
@@ -19,15 +16,12 @@ export async function getSingleProduct(id) {
 
 export async function getLastProducts() {
   const params = query((collection(db, 'products')), orderBy('createdAt', 'desc'), limit(4));
-  return await getDocs(params)
-    .then((snapshot) => {
-      const lastProducts = [];
-      snapshot.docs.forEach((doc) => {
-        lastProducts.push({ ...doc.data(), id: doc.id });
-      });
-
-      return lastProducts;
-    });
+  const snapshot = await getDocs(params);
+  const lastProducts = [];
+  snapshot.docs.forEach((doc) => {
+    lastProducts.push({ ...doc.data(), id: doc.id });
+  });
+  return lastProducts;
 }
 
 export async function createProduct(data) {

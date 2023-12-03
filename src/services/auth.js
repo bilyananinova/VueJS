@@ -2,25 +2,21 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase/firebase';
 
-export function register(name, email, password) {
-  return createUserWithEmailAndPassword(auth, email, password)
-    .then((resp) => {
-      if (resp) {
-        setDoc(doc(db, 'users', resp.user.uid), {
-          name,
-          email: resp.user.email,
-        });
-
-        return resp.user.currentUser;
-      }
+export async function register(name, email, password) {
+  const resp = await createUserWithEmailAndPassword(auth, email, password);
+  if (resp) {
+    setDoc(doc(db, 'users', resp.user.uid), {
+      name,
+      email: resp.user.email,
     });
+
+    return resp.user.currentUser;
+  }
 }
 
 export async function login(email, password) {
-  return await signInWithEmailAndPassword(auth, email, password)
-    .then(async (resp) => {
-      return resp.user.uid;
-    });
+  const resp = await signInWithEmailAndPassword(auth, email, password);
+  return resp.user.uid;
 }
 
 export async function getUser(id) {
