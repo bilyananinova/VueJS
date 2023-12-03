@@ -9,11 +9,10 @@ export default {
     };
   },
 
-  method: {
+  methods: {
     async logoutUser() {
       await logout();
       this.userStore.clearStorage();
-      this.$router.go(0);
     },
   },
 };
