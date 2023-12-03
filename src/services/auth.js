@@ -16,8 +16,8 @@ export function register(name, email, password) {
     });
 }
 
-export function login(email, password) {
-  return signInWithEmailAndPassword(auth, email, password)
+export async function login(email, password) {
+  return await signInWithEmailAndPassword(auth, email, password)
     .then(async (resp) => {
       return resp.user.uid;
     });

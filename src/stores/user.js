@@ -12,6 +12,7 @@ export const useUserStore = defineStore('user', {
     setProfile(data) {
       this.profile = data;
       this.isAuth = true;
+      sessionStorage.setItem('user', JSON.stringify(data));
     },
     setAdmin(id) {
       if (id === 'QZlU90HIsffGKWXSzuQaKvQ5BD13') {

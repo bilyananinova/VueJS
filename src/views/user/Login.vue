@@ -37,7 +37,6 @@ export default {
             this.userStore.isAuth = true;
             this.userStore.setAdmin(userId);
             this.userStore.setProfile({ ...user, id: userId });
-            console.log(this.userStore.profile);
             this.$router.push({ path: '/' });
           });
       }

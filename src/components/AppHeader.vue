@@ -1,5 +1,13 @@
-<script setup>
+<script>
+import { useUserStore } from '../stores/user';
 
+export default {
+  setup() {
+    return {
+      userStore: useUserStore(),
+    };
+  },
+};
 </script>
 
 <template>
@@ -43,18 +51,18 @@
         Blog
       </router-link>
 
-      <router-link to="/coffee-catalog/create">
+      <router-link v-if="userStore.isAdmin" to="/coffee-catalog/create">
         Create product
       </router-link>
 
-      <router-link to="/articles/create">
+      <router-link v-if="userStore.isAdmin" to="/articles/create">
         Create article
       </router-link>
     </div>
 
-    <div class="user">
+    <div v-if="userStore.profile" class="user">
       <router-link to="/user/#">
-        Welcome, Pesho!
+        Welcome, {{ userStore.profile.name }}!
       </router-link>
 
       <router-link to="/logout">
@@ -62,7 +70,7 @@
       </router-link>
     </div>
 
-    <div class="guest">
+    <div v-else class="guest">
       <router-link to="/login">
         Login
       </router-link>
