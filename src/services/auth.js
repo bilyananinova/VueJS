@@ -3,27 +3,42 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase/firebase';
 
 export async function register(name, email, password) {
-  const resp = await createUserWithEmailAndPassword(auth, email, password);
-  if (resp.user.uid) {
-    setDoc(doc(db, 'users', resp.user.uid), {
-      name,
-      email: resp.user.email,
-      cart: [],
-    });
+  try {
+    const resp = await createUserWithEmailAndPassword(auth, email, password);
+    if (resp.user.uid) {
+      await setDoc(doc(db, 'users', resp.user.uid), {
+        name,
+        email: resp.user.email,
+        cart: [],
+      });
 
-    return resp.user.uid;
+      return resp.user.uid;
+    }
+  }
+  catch (error) {
+    console.error(error);
   }
 }
 
 export async function login(email, password) {
-  const resp = await signInWithEmailAndPassword(auth, email, password);
-  return resp.user.uid;
+  try {
+    const resp = await signInWithEmailAndPassword(auth, email, password);
+    return resp.user.uid;
+  }
+  catch (error) {
+    console.error(error);
+  }
 }
 
 export async function logout() {
-  await signOut(auth);
+  return await signOut(auth);
 }
 
 export async function getUser(id) {
-  return (await getDoc(doc(db, 'users', id))).data();
+  try {
+    return (await getDoc(doc(db, 'users', id))).data();
+  }
+  catch (error) {
+    console.error(error);
+  }
 }

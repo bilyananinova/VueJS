@@ -1,14 +1,15 @@
 <script>
+import { RouterLink } from 'vue-router';
 import { logout } from '../services/auth';
 import { useUserStore } from '../stores/user';
 
 export default {
+  components: { RouterLink },
   setup() {
     return {
       userStore: useUserStore(),
     };
   },
-
   methods: {
     async logoutUser() {
       await logout();
@@ -22,9 +23,9 @@ export default {
   <header class="site-header">
     <section class="header-logo">
       <h1>
-        <router-link to="/">
+        <RouterLink to="/">
           Coffee Shop
-        </router-link>
+        </RouterLink>
       </h1>
 
       <p>VueJS</p>
@@ -36,10 +37,10 @@ export default {
         <li><strong>Email:</strong>email@mail.bg</li>
 
         <li class="cart">
-          <router-link to="/cart">
+          <RouterLink to="/cart">
             <i class="fas fa-shopping-bag" />
             <span class="cart-count">2</span>
-          </router-link>
+          </RouterLink>
         </li>
       </ul>
     </section>
@@ -47,45 +48,45 @@ export default {
 
   <nav class="mainav">
     <div>
-      <router-link to="/">
+      <RouterLink to="/">
         Home
-      </router-link>
+      </RouterLink>
 
-      <router-link to="/coffee-catalog">
+      <RouterLink to="/coffee-catalog">
         Shop
-      </router-link>
+      </RouterLink>
 
-      <router-link to="/articles">
+      <RouterLink to="/articles">
         Blog
-      </router-link>
+      </RouterLink>
 
-      <router-link v-if="userStore.isAdmin" to="/coffee-catalog/create">
+      <RouterLink v-if="userStore.isAdmin" to="/coffee-catalog/create">
         Create product
-      </router-link>
+      </RouterLink>
 
-      <router-link v-if="userStore.isAdmin" to="/articles/create">
+      <RouterLink v-if="userStore.isAdmin" to="/articles/create">
         Create article
-      </router-link>
+      </RouterLink>
     </div>
 
     <div v-if="userStore.profile" class="user">
-      <router-link to="/user/#">
+      <RouterLink :to="`/user/${userStore.profile.id}`">
         Welcome, {{ userStore.profile.name }}!
-      </router-link>
+      </RouterLink>
 
-      <router-link to="/" @click="logoutUser">
+      <RouterLink to="/" @click="logoutUser">
         Logout
-      </router-link>
+      </RouterLink>
     </div>
 
     <div v-else class="guest">
-      <router-link to="/login">
+      <RouterLink to="/login">
         Login
-      </router-link>
+      </RouterLink>
 
-      <router-link to="/register">
+      <RouterLink to="/register">
         Register
-      </router-link>
+      </RouterLink>
     </div>
   </nav>
 </template>
