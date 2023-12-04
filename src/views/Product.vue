@@ -1,8 +1,11 @@
 <script>
-import { useRoute } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
+import { mapState } from 'pinia';
 import { deleteProduct, getSingleProduct } from '../services/products';
+import { useUserStore } from '../stores/userStore';
 
 export default {
+  components: { RouterLink },
   setup() {
     return { route: useRoute() };
   },
@@ -11,6 +14,9 @@ export default {
       product: {},
       id: this.$route.params.id,
     };
+  },
+  computed: {
+    ...mapState(useUserStore, ['isAuth', 'isAdmin']),
   },
   async created() {
     this.product = (await getSingleProduct(this.id)).data();
@@ -38,7 +44,7 @@ export default {
         <span class="details-price">{{ product.price }}$</span>
         <p>{{ product.description }}</p>
 
-        <div class="details-action">
+        <div v-if="isAuth" class="details-action">
           <button class="like-btn">
             <i class="fas fa-thumbs-up" /><span>3</span>
           </button>
@@ -51,15 +57,17 @@ export default {
           </button>
         </div>
 
-        <router-link :to="`/coffee-catalog/${id}/edit`" class="edit-btn">
-          <i class="fas fa-edit" />
-          edit
-        </router-link>
+        <template v-if="isAdmin">
+          <RouterLink :to="`/coffee-catalog/${id}/edit`" class="edit-btn">
+            <i class="fas fa-edit" />
+            edit
+          </RouterLink>
 
-        <button class="delete-btn" @click="deleteProd(id)">
-          <i class="fas fa-trash-alt" />
-          delete
-        </button>
+          <button class="delete-btn" @click="deleteProd(id)">
+            <i class="fas fa-trash-alt" />
+            delete
+          </button>
+        </template>
       </div>
     </section>
   </section>

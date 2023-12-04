@@ -1,5 +1,7 @@
 <script>
+import { mapState } from 'pinia';
 import { deleteProduct } from '../../services/products';
+import { useUserStore } from '../../stores/userStore';
 
 export default {
   props: {
@@ -12,6 +14,9 @@ export default {
       img: String,
       price: Number,
     },
+  },
+  computed: {
+    ...mapState(useUserStore, ['isAdmin']),
   },
   methods: {
     async deleteProd(id) {
@@ -56,13 +61,15 @@ export default {
           <i class="fas fa-shopping-cart" />add to cart
         </button>
 
-        <router-link :to="`/coffee-catalog/${product.id}/edit`" class="edit-btn">
-          <i class="fas fa-edit" />edit
-        </router-link>
+        <template v-if="isAdmin">
+          <RouterLink :to="`/coffee-catalog/${product.id}/edit`" class="edit-btn">
+            <i class="fas fa-edit" />edit
+          </RouterLink>
 
-        <button class="delete-btn" @click="deleteProd(product.id)">
-          <i class="fas fa-trash-alt" />delete
-        </button>
+          <button class="delete-btn" @click="deleteProd(product.id)">
+            <i class="fas fa-trash-alt" />delete
+          </button>
+        </template>
       </div>
     </div>
   </section>

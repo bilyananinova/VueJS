@@ -1,4 +1,6 @@
 <script>
+import { mapState } from 'pinia';
+import { useUserStore } from '../stores/userStore';
 import { deleteArticle, getSingleArticle } from '../services/articles';
 
 export default {
@@ -7,6 +9,9 @@ export default {
       article: {},
       id: this.$route.params.id,
     };
+  },
+  computed: {
+    ...mapState(useUserStore, ['isAdmin']),
   },
   async created() {
     this.article = (await getSingleArticle(this.id)).data();
@@ -34,11 +39,11 @@ export default {
         {{ article.content }}
       </section>
 
-      <section class="article-actions">
-        <router-link :to="`/articles/${id}/edit`" class="edit-article-btn">
+      <section v-if="isAdmin" class="article-actions">
+        <RouterLink :to="`/articles/${id}/edit`" class="edit-article-btn">
           <i class="fas fa-edit" />
           edit
-        </router-link>
+        </RouterLink>
         <button class="delete-article-btn" @click="deleteArt(id)">
           <i class="fas fa-trash-alt" />
           delete

@@ -1,7 +1,7 @@
 <script>
 import { RouterLink } from 'vue-router';
 import { logout } from '../services/auth';
-import { useUserStore } from '../stores/user';
+import { useUserStore } from '../stores/userStore';
 
 export default {
   components: { RouterLink },
@@ -39,7 +39,7 @@ export default {
         <li class="cart">
           <RouterLink to="/cart">
             <i class="fas fa-shopping-bag" />
-            <span class="cart-count">2</span>
+            <span v-if="userStore.isAuth" class="cart-count">2</span>
           </RouterLink>
         </li>
       </ul>

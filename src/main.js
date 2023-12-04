@@ -1,12 +1,16 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-import './style.css';
+import { useUserStore } from './stores/userStore';
 import App from './App.vue';
 import router from './routes/index';
+import './style.css';
 
 const pinia = createPinia();
 const app = createApp(App);
 
 app.use(pinia);
 app.use(router);
+
+const userStore = useUserStore();
+userStore.setPresisted();
 app.mount('#app');
