@@ -17,7 +17,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(useUserStore, ['isAdmin', 'profile']),
+    ...mapState(useUserStore, ['isAdmin', 'profile', 'isAuth']),
   },
   methods: {
     async deleteProd(id) {
@@ -53,17 +53,19 @@ export default {
           details
         </RouterLink>
 
-        <button class="like-btn">
-          <i class="fas fa-thumbs-up" /><span>5</span>
-        </button>
+        <template v-if="isAuth">
+          <button class="like-btn">
+            <i class="fas fa-thumbs-up" /><span>5</span>
+          </button>
 
-        <button class="dislike-btn">
-          <i class="fas fa-thumbs-down" /><span>2</span>
-        </button>
+          <button class="dislike-btn">
+            <i class="fas fa-thumbs-down" /><span>2</span>
+          </button>
 
-        <button class="add-btn" @click="addToCart">
-          <i class="fas fa-shopping-cart" />add to cart
-        </button>
+          <button class="add-btn" @click="addToCart">
+            <i class="fas fa-shopping-cart" />add to cart
+          </button>
+        </template>
 
         <template v-if="isAdmin">
           <RouterLink :to="`/coffee-catalog/${product.id}/edit`" class="edit-btn">

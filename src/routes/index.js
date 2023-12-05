@@ -6,12 +6,12 @@ import Cart from '../views/Cart/Cart.vue';
 import NotFound from '../views/NotFound.vue';
 
 import Catalog from '../views/Catalog/Catalog.vue';
-import Product from '../views/Product.vue';
+import ProductDetails from '../views/ProductDetails.vue';
 import ProductCreate from '../views/ProductCreate.vue';
 import ProductEdit from '../views/ProductEdit.vue';
 
 import Blog from '../views/Blog/Blog.vue';
-import Article from '../views/Article.vue';
+import ArticleDetails from '../views/ArticleDetails.vue';
 import ArticleCreate from '../views/ArticleCreate.vue';
 import ArticleEdit from '../views/ArticleEdit.vue';
 
@@ -32,10 +32,10 @@ const routes = [
   { path: '/coffee-catalog/create', component: ProductCreate, beforeEnter: validateIsAdminAndRedirect },
   { path: '/coffee-catalog', component: Catalog },
   { path: '/coffee-catalog/:id/edit', component: ProductEdit, beforeEnter: validateIsAdminAndRedirect },
-  { path: '/coffee-catalog/:id', component: Product },
+  { path: '/coffee-catalog/:id', component: ProductDetails },
   { path: '/articles/create', component: ArticleCreate, beforeEnter: validateIsAdminAndRedirect },
   { path: '/articles', component: Blog },
-  { path: '/articles/:id', component: Article },
+  { path: '/articles/:id', component: ArticleDetails },
   { path: '/articles/:id/edit', component: ArticleEdit, beforeEnter: validateIsAdminAndRedirect },
   { path: '/cart', component: Cart },
   { path: '/:pathMatch(.*)*', component: NotFound },

@@ -2,6 +2,7 @@
 import { RouterLink, useRoute } from 'vue-router';
 import { mapState } from 'pinia';
 import { deleteProduct, getSingleProduct } from '../services/products';
+import { addCart } from '../services/cart';
 import { useUserStore } from '../stores/userStore';
 
 export default {
@@ -16,7 +17,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(useUserStore, ['isAuth', 'isAdmin']),
+    ...mapState(useUserStore, ['isAuth', 'isAdmin', 'profile']),
   },
   async created() {
     this.product = (await getSingleProduct(this.id)).data();
@@ -25,6 +26,9 @@ export default {
     async deleteProd(id) {
       await deleteProduct(id);
       this.$router.go(-1);
+    },
+    async addToCart() {
+      await addCart(this.product, this.profile.id);
     },
   },
 };
@@ -51,7 +55,7 @@ export default {
           <button class="dislike-btn">
             <i class="fas fa-thumbs-down" /><span>3</span>
           </button>
-          <button class="add-btn">
+          <button class="add-btn" @click="addToCart">
             <i class="fas fa-shopping-cart" />
             add to cart
           </button>
