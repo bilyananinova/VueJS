@@ -2,6 +2,7 @@
 import { mapState } from 'pinia';
 import { deleteProduct } from '../../services/products';
 import { useUserStore } from '../../stores/userStore';
+import { addCart } from '../../services/cart';
 
 export default {
   props: {
@@ -16,12 +17,15 @@ export default {
     },
   },
   computed: {
-    ...mapState(useUserStore, ['isAdmin']),
+    ...mapState(useUserStore, ['isAdmin', 'profile']),
   },
   methods: {
     async deleteProd(id) {
       await deleteProduct(id);
       this.$router.go(0);
+    },
+    async addToCart() {
+      await addCart(this.product, this.profile.id);
     },
   },
 };
@@ -44,10 +48,10 @@ export default {
       </p>
 
       <div class="product-action">
-        <router-link :to="`/coffee-catalog/${product.id}`" class="details-btn">
+        <RouterLink :to="`/coffee-catalog/${product.id}`" class="details-btn">
           <i class="fas fa-solid fa-mug-hot" />
           details
-        </router-link>
+        </RouterLink>
 
         <button class="like-btn">
           <i class="fas fa-thumbs-up" /><span>5</span>
@@ -57,7 +61,7 @@ export default {
           <i class="fas fa-thumbs-down" /><span>2</span>
         </button>
 
-        <button class="add-btn">
+        <button class="add-btn" @click="addToCart">
           <i class="fas fa-shopping-cart" />add to cart
         </button>
 

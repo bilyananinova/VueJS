@@ -39,7 +39,7 @@ export default {
         <li class="cart">
           <RouterLink to="/cart">
             <i class="fas fa-shopping-bag" />
-            <span v-if="userStore.isAuth" class="cart-count">2</span>
+            <span v-if="userStore.isAuth || userStore.isAdmin" class="cart-count">2</span>
           </RouterLink>
         </li>
       </ul>
