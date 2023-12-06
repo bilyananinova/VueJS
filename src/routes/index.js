@@ -15,9 +15,9 @@ import ArticleDetails from '../views/ArticleDetails.vue';
 import ArticleCreate from '../views/ArticleCreate.vue';
 import ArticleEdit from '../views/ArticleEdit.vue';
 
-import Login from '../views/user/Login.vue';
-import Register from '../views/user/Register.vue';
-import Profile from '../views/user/Profile.vue';
+import Login from '../views/Login.vue';
+import Register from '../views/Register.vue';
+import Profile from '../views/Profile.vue';
 
 function validateIsAdminAndRedirect() {
   const userStore = useUserStore();
@@ -38,7 +38,12 @@ const routes = [
   { path: '/articles', component: Blog },
   { path: '/articles/:id', component: ArticleDetails },
   { path: '/articles/:id/edit', component: ArticleEdit, beforeEnter: validateIsAdminAndRedirect },
-  { path: '/cart', component: Cart },
+  { path: '/cart', component: Cart, beforeEnter: () => {
+    const userStore = useUserStore();
+    if (!userStore.isAuth) {
+      return { path: '/login' };
+    }
+  } },
   { path: '/user/:id', component: Profile },
   { path: '/:pathMatch(.*)*', component: NotFound },
 ];

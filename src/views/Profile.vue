@@ -1,7 +1,7 @@
 <script>
 import { mapState } from 'pinia';
-import { getLikes } from '../../services/likes';
-import { useUserStore } from '../../stores/userStore';
+import { getLikes } from '../services/likes';
+import { useUserStore } from '../stores/userStore';
 
 export default {
   data() {
@@ -51,7 +51,7 @@ export default {
         Check our
         <RouterLink to="/coffee-catalog">
           catalog
-        </RouterLink> and find your wine...
+        </RouterLink> and find your coffee...
       </h1>
     </section>
   </section>

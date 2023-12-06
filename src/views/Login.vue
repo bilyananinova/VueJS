@@ -1,16 +1,12 @@
 <script>
-import { email, helpers, minLength, required, sameAs } from '@vuelidate/validators';
+import { email, helpers, minLength, required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import { getUser, register } from '../../services/auth';
-import { useUserStore } from '../../stores/userStore';
-import Error from '../../components/Error.vue';
+import { getUser, login } from '../services/auth';
+import { useUserStore } from '../stores/userStore';
+import Error from '../components/Error.vue';
 
 function minLengthHelpers(number) {
   return helpers.withMessage(`Password must be ${number} characters long!`, minLength(number));
-}
-
-function sameAsHelpers(password) {
-  return helpers.withMessage('Password missmatch!', sameAs(password));
 }
 
 export default {
@@ -25,18 +21,17 @@ export default {
     return {
       errors: [],
       formData: {
-        name: '',
         email: '',
         password: '',
-        repeatPass: '',
       },
     };
   },
+
   methods: {
     async onSubmit() {
       if (await this.v$.$validate()) {
-        const { name, email, password } = this.formData;
-        const userId = await register(name, email, password);
+        const { email, password } = this.formData;
+        const userId = await login(email, password);
         const user = await getUser(userId);
 
         if (user) {
@@ -56,7 +51,6 @@ export default {
   validations() {
     return {
       formData: {
-        name: { required: helpers.withMessage('Name is required!', required) },
         email: {
           required: helpers.withMessage('Email is required!', required),
           email: helpers.withMessage('Email must be a valid email address!', email),
@@ -64,10 +58,6 @@ export default {
         password: {
           required: helpers.withMessage('Password is required!', required),
           minLength: minLengthHelpers(6),
-        },
-        repeatPass: {
-          required: helpers.withMessage('Repeat password is required!', required),
-          sameAs: sameAsHelpers(this.formData.password),
         },
       },
     };
@@ -77,23 +67,18 @@ export default {
 
 <template>
   <Error v-if="errors.length > 0" :errors="errors" />
-  <h3>Registration Page</h3>
-  <section class="form-wrapper">
-    <section class="form-section">
-      <form class="register-form" @submit.prevent="onSubmit">
-        <label for="register-name">Name <span class="required">*</span></label>
-        <input
-          id="register-name"
-          v-model="formData.name"
-          type="text"
-          class="form-input"
-          name="name"
-          placeholder="Ivan Ivanov"
-        >
 
-        <label for="register-email">Email address<span class="required">*</span></label>
+  <h3>Login Page</h3>
+  <div class="form-wrapper">
+    <section class="form-img">
+      <img src="../assets/login.jpg" alt="">
+    </section>
+
+    <section class="form-section">
+      <form class="login-form" @submit.prevent="onSubmit">
+        <label for="login-email">Email address<span class="required">*</span></label>
         <input
-          id="register-email"
+          id="login-email"
           v-model="formData.email"
           type="email"
           class="form-input"
@@ -101,9 +86,9 @@ export default {
           placeholder="ivan@mail.bg"
         >
 
-        <label for="register-password">Password <span class="required">*</span></label>
+        <label for="login-password">Password <span class="required">*</span></label>
         <input
-          id="register-password"
+          id="login-password"
           v-model="formData.password"
           type="password"
           class="form-input"
@@ -111,37 +96,23 @@ export default {
           placeholder="******"
         >
 
-        <label for="register-repeat-password">Repeat Password <span class="required">*</span></label>
-        <input
-          id="register-repeat-password"
-          v-model="formData.repeatPass"
-          type="password"
-          class="form-input"
-          name="rePassword"
-          placeholder="******"
-        >
-
-        <button type="submit" class="register-button">
-          Register
+        <button type="submit" class="login-button">
+          Login
         </button>
 
         <p>
-          Already have an account...
-          <router-link to="/login">
-            Login
+          Don't have an account?
+          <router-link to="/register">
+            Register
           </router-link> now.
         </p>
       </form>
     </section>
-
-    <section class="form-img">
-      <img src="../../assets/register.jpg" alt="">
-    </section>
-  </section>
+  </div>
 </template>
 
 <style scoped>
-.register-form {
+.login-form {
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -149,16 +120,16 @@ export default {
   margin: 3em auto;
 }
 
-.register-form p {
+.login-form p {
   font-family: var(--main-font-family-headings);
 }
 
-.register-form label {
+.login-form label {
   opacity: 0.9;
   margin: 1.2em 0 0.5em;
 }
 
-.register-button {
+.login-button {
   margin: 2em 0 1em;
   padding: 0.5em;
   font-size: 1.1em;
@@ -168,20 +139,19 @@ export default {
   background: var(--main-background);
 }
 
-.register-button:hover,
-.register-button:focus {
+.login-button:hover,
+.login-button:focus {
   cursor: pointer;
 }
 
-.register-form input {
-  border: none;
+.login-form input {
   border: 1px solid var(--main-background);
   border-radius: 0.5em;
   padding: 1em;
 }
 
-.register-form input:focus,
-.register-form input:hover {
+.login-form input:focus,
+.login-form input:hover {
   box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
   outline: none;
 }

@@ -9,7 +9,6 @@ export async function register(name, email, password) {
       await setDoc(doc(db, 'users', resp.user.uid), {
         name,
         email: resp.user.email,
-        cart: [],
       });
 
       return resp.user.uid;
