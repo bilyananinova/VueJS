@@ -14,14 +14,19 @@ export const useUserStore = defineStore('user', {
       this.isAuth = true;
       sessionStorage.setItem('user', JSON.stringify(this.profile));
     },
-    setPresisted() {
+    setPersistedProfile() {
       const persisted = sessionStorage.getItem('user');
-      this.profile = JSON.parse(persisted);
+      if (persisted) {
+        this.profile = JSON.parse(persisted);
+        this.isAuth = true;
+        this.isAdmin = this.setAdmin(this.profile.id);
+      }
     },
     setAdmin(id) {
       if (id === 'QZlU90HIsffGKWXSzuQaKvQ5BD13') {
-        this.isAdmin = true;
+        return this.isAdmin = true;
       }
+      return this.isAdmin = false;
     },
     clearStorage() {
       this.profile = null;

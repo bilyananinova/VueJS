@@ -1,19 +1,19 @@
 <script>
+import { mapActions, mapState } from 'pinia';
 import { RouterLink } from 'vue-router';
 import { logout } from '../services/auth';
 import { useUserStore } from '../stores/userStore';
 
 export default {
   components: { RouterLink },
-  setup() {
-    return {
-      userStore: useUserStore(),
-    };
+  computed: {
+    ...mapState(useUserStore, ['profile', 'isAdmin', 'isAuth']),
   },
   methods: {
+    ...mapActions(useUserStore, ['clearStorage']),
     async logoutUser() {
       await logout();
-      this.userStore.clearStorage();
+      this.clearStorage();
     },
   },
 };
@@ -39,7 +39,7 @@ export default {
         <li class="cart">
           <RouterLink to="/cart">
             <i class="fas fa-shopping-bag" />
-            <span v-if="userStore.isAuth || userStore.isAdmin" class="cart-count">2</span>
+            <span v-if="isAuth || isAdmin" class="cart-count">2</span>
           </RouterLink>
         </li>
       </ul>
@@ -60,18 +60,18 @@ export default {
         Blog
       </RouterLink>
 
-      <RouterLink v-if="userStore.isAdmin" to="/coffee-catalog/create">
+      <RouterLink v-if="isAdmin" to="/coffee-catalog/create">
         Create product
       </RouterLink>
 
-      <RouterLink v-if="userStore.isAdmin" to="/articles/create">
+      <RouterLink v-if="isAdmin" to="/articles/create">
         Create article
       </RouterLink>
     </div>
 
-    <div v-if="userStore.profile" class="user">
-      <RouterLink :to="`/user/${userStore.profile.id}`">
-        Welcome, {{ userStore.profile.name }}!
+    <div v-if="profile" class="user">
+      <RouterLink :to="`/user/${profile.id}`">
+        Welcome, {{ profile.name }}!
       </RouterLink>
 
       <RouterLink to="/" @click="logoutUser">

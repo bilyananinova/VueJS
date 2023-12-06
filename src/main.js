@@ -12,5 +12,5 @@ app.use(pinia);
 app.use(router);
 
 const userStore = useUserStore();
-userStore.setPresisted();
+userStore.setPersistedProfile();
 app.mount('#app');
