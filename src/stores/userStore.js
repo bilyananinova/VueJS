@@ -12,7 +12,7 @@ export const useUserStore = defineStore('user', {
     setProfile(data) {
       this.profile = data;
       this.isAuth = true;
-      sessionStorage.setItem('user', JSON.stringify(data));
+      sessionStorage.setItem('user', JSON.stringify(this.profile));
     },
     setPresisted() {
       const persisted = sessionStorage.getItem('user');

@@ -17,6 +17,7 @@ import ArticleEdit from '../views/ArticleEdit.vue';
 
 import Login from '../views/user/Login.vue';
 import Register from '../views/user/Register.vue';
+import Profile from '../views/user/Profile.vue';
 
 function validateIsAdminAndRedirect() {
   const userStore = useUserStore();
@@ -38,6 +39,7 @@ const routes = [
   { path: '/articles/:id', component: ArticleDetails },
   { path: '/articles/:id/edit', component: ArticleEdit, beforeEnter: validateIsAdminAndRedirect },
   { path: '/cart', component: Cart },
+  { path: '/user/:id', component: Profile },
   { path: '/:pathMatch(.*)*', component: NotFound },
 ];
 

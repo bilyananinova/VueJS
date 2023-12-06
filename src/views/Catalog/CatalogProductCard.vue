@@ -1,8 +1,8 @@
 <script>
 import { mapState } from 'pinia';
 import { deleteProduct } from '../../services/products';
-import { useUserStore } from '../../stores/userStore';
 import { addCart } from '../../services/cart';
+import { useUserStore } from '../../stores/userStore';
 
 export default {
   props: {
@@ -13,6 +13,8 @@ export default {
       name: String,
       description: String,
       img: String,
+      likes: [],
+      dislikes: [],
       price: Number,
     },
   },
@@ -54,14 +56,6 @@ export default {
         </RouterLink>
 
         <template v-if="isAuth">
-          <button class="like-btn">
-            <i class="fas fa-thumbs-up" /><span>5</span>
-          </button>
-
-          <button class="dislike-btn">
-            <i class="fas fa-thumbs-down" /><span>2</span>
-          </button>
-
           <button class="add-btn" @click="addToCart">
             <i class="fas fa-shopping-cart" />add to cart
           </button>
@@ -171,8 +165,6 @@ export default {
   box-shadow: 0px 0px 5px 1px var(--main-background);
 }
 
-.like-btn span,
-.dislike-btn span,
 .add-btn,
 .delete-btn {
   font-family: Verdana, Geneva, sans-serif;

@@ -18,6 +18,8 @@ export default {
         description: '',
         price: '',
         img: '',
+        likes: [],
+        dislikes: [],
         createdAt: '',
       },
       errors: [],

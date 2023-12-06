@@ -3,6 +3,7 @@ import { RouterLink, useRoute } from 'vue-router';
 import { mapState } from 'pinia';
 import { deleteProduct, getSingleProduct } from '../services/products';
 import { addCart } from '../services/cart';
+import { dislike, like } from '../services/likes';
 import { useUserStore } from '../stores/userStore';
 
 export default {
@@ -14,6 +15,8 @@ export default {
     return {
       product: {},
       id: this.$route.params.id,
+      productLikes: 0,
+      productDislikes: 0,
     };
   },
   computed: {
@@ -21,6 +24,8 @@ export default {
   },
   async created() {
     this.product = (await getSingleProduct(this.id)).data();
+    this.productLikes = this.product.likes.length;
+    this.productDislikes = this.product.dislikes.length;
   },
   methods: {
     async deleteProd(id) {
@@ -29,6 +34,16 @@ export default {
     },
     async addToCart() {
       await addCart(this.product, this.profile.id);
+    },
+    async likeProduct(id) {
+      await like(id, this.profile.id);
+      this.productLikes = (await getSingleProduct(this.id)).data().likes.length;
+      this.productDislikes = (await getSingleProduct(this.id)).data().dislikes.length;
+    },
+    async dislikeProduct(id) {
+      await dislike(id, this.profile.id);
+      this.productLikes = (await getSingleProduct(this.id)).data().likes.length;
+      this.productDislikes = (await getSingleProduct(this.id)).data().dislikes.length;
     },
   },
 };
@@ -49,11 +64,11 @@ export default {
         <p>{{ product.description }}</p>
 
         <div v-if="isAuth" class="details-action">
-          <button class="like-btn">
-            <i class="fas fa-thumbs-up" /><span>3</span>
+          <button class="like-btn" @click="likeProduct(id)">
+            <i class="fas fa-thumbs-up" /><span>{{ productLikes }}</span>
           </button>
-          <button class="dislike-btn">
-            <i class="fas fa-thumbs-down" /><span>3</span>
+          <button class="dislike-btn" @click="dislikeProduct(id)">
+            <i class="fas fa-thumbs-down" /><span>{{ productDislikes }}</span>
           </button>
           <button class="add-btn" @click="addToCart">
             <i class="fas fa-shopping-cart" />
@@ -174,6 +189,11 @@ export default {
   border-color: var(--main-background);
   background: #ffffff;
   box-shadow: 0px 0px 5px 1px var(--main-background);
+}
+
+.details-action .like-btn:hover,
+.details-action .dislike-btn:hover {
+  cursor: pointer;
 }
 
 .edit-btn:hover {
