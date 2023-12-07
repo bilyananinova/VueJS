@@ -1,10 +1,11 @@
 <script>
 import { RouterLink, useRoute } from 'vue-router';
-import { mapState } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import { deleteProduct, getSingleProduct } from '../services/products';
 import { addCart } from '../services/cart';
 import { dislike, like } from '../services/likes';
 import { useUserStore } from '../stores/userStore';
+import { useCartStore } from '../stores/cartStore';
 
 export default {
   components: { RouterLink },
@@ -20,30 +21,33 @@ export default {
     };
   },
   computed: {
-    ...mapState(useUserStore, ['isAuth', 'isAdmin', 'profile']),
+    ...mapState(useUserStore, ['isAuth', 'profile', 'isAdmin']),
   },
   async created() {
     this.product = (await getSingleProduct(this.id)).data();
-    this.productLikes = this.product.likes.length;
-    this.productDislikes = this.product.dislikes.length;
+    this.product.id = this.id;
+    this.productLikes = this.product.likes?.length;
+    this.productDislikes = this.product.dislikes?.length;
   },
   methods: {
+    ...mapActions(useCartStore, ['setCart']),
     async deleteProd(id) {
       await deleteProduct(id);
       this.$router.go(-1);
     },
     async addToCart() {
       await addCart(this.product, this.profile.id);
+      this.setCart();
     },
     async likeProduct(id) {
       await like(id, this.profile.id);
-      this.productLikes = (await getSingleProduct(this.id)).data().likes.length;
-      this.productDislikes = (await getSingleProduct(this.id)).data().dislikes.length;
+      this.productLikes = (await getSingleProduct(this.id)).data().likes?.length;
+      this.productDislikes = (await getSingleProduct(this.id)).data().dislikes?.length;
     },
     async dislikeProduct(id) {
       await dislike(id, this.profile.id);
-      this.productLikes = (await getSingleProduct(this.id)).data().likes.length;
-      this.productDislikes = (await getSingleProduct(this.id)).data().dislikes.length;
+      this.productLikes = (await getSingleProduct(this.id)).data().likes?.length;
+      this.productDislikes = (await getSingleProduct(this.id)).data().dislikes?.length;
     },
   },
 };
