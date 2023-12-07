@@ -44,7 +44,7 @@ export default {
       this.setCart();
     },
     clearCart() {
-      this.cartList.forEach((prod) => {
+      this.products.forEach((prod) => {
         this.removeProduct(prod.id);
       });
       this.isVisible = true;
@@ -74,7 +74,7 @@ export default {
       <p>Total Products: <span>{{ totalQty }}</span></p>
       <p>Total Price to Pay: <span>{{ totalSum.toFixed(2) }} $</span></p>
 
-      <button @click="isVisible = !isVisible">
+      <button :disabled="!products.length" @click="isVisible = !isVisible">
         Continue
       </button>
     </section>

@@ -31,7 +31,7 @@ export async function getUserCart(userId) {
 export async function updateCart(productId, userId, product) {
   try {
     return updateDoc(doc(db, `cart ${userId}`, productId), {
-      product,
+      ...product,
     });
   }
   catch (error) {

@@ -1,6 +1,8 @@
 <script>
-import { mapActions } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import { useCartStore } from '../../stores/cartStore';
+import { useUserStore } from '../../stores/userStore';
+import { updateCart } from '../../services/cart';
 
 export default {
   props: {
@@ -16,19 +18,26 @@ export default {
     },
   },
   emits: ['onClick'],
+  data() {
+    return {
+      tempObj: this.product,
+    };
+  },
+  computed: {
+    ...mapState(useUserStore, ['profile']),
+  },
   methods: {
     ...mapActions(useCartStore, ['setCart']),
     onClick(id) {
       this.$emit('onClick', id);
     },
-    increment() {
-      // eslint-disable-next-line vue/no-mutating-props
-      return this.product.qty++;
+    async increment() {
+      this.tempObj.qty += 1;
+      await updateCart(this.product.id, this.profile.id, this.tempObj);
     },
-
-    decrement() {
-      // eslint-disable-next-line vue/no-mutating-props
-      this.product.qty--;
+    async decrement() {
+      this.tempObj.qty -= 1;
+      await updateCart(this.product.id, this.profile.id, this.tempObj);
 
       if (this.product.qty === 0) {
         this.$emit('onClick', this.product.id);
