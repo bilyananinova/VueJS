@@ -1,4 +1,7 @@
 <script>
+import { mapActions } from 'pinia';
+import { useCartStore } from '../../stores/cartStore';
+
 export default {
   props: {
     product: {
@@ -14,6 +17,7 @@ export default {
   },
   emits: ['onClick'],
   methods: {
+    ...mapActions(useCartStore, ['setCart']),
     onClick(id) {
       this.$emit('onClick', id);
     },
@@ -24,7 +28,11 @@ export default {
 
     decrement() {
       // eslint-disable-next-line vue/no-mutating-props
-      return this.product.qty--;
+      this.product.qty--;
+
+      if (this.product.qty === 0) {
+        this.$emit('onClick', this.product.id);
+      }
     },
   },
 };
