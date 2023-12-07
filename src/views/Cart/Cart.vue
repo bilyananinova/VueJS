@@ -1,6 +1,7 @@
 <script>
-import { mapState } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import { useUserStore } from '../../stores/userStore';
+import { useCartStore } from '../../stores/cartStore';
 import { deleteFromCart, getUserCart } from '../../services/cart';
 import CartProduct from './CartProduct.vue';
 
@@ -8,7 +9,7 @@ export default {
   components: { CartProduct },
   data() {
     return {
-      cartList: [],
+      products: [],
       isVisible: true,
     };
   },
@@ -16,36 +17,38 @@ export default {
     ...mapState(useUserStore, ['profile']),
     totalQty() {
       let total = 0;
-      this.cartList.forEach((prod) => {
+      this.products.forEach((prod) => {
         total += prod.qty;
       });
       return total;
     },
     totalSum() {
       let total = 0;
-      this.cartList.forEach((prod) => {
+      this.products.forEach((prod) => {
         total += prod.qty * prod.price;
       });
       return total;
     },
   },
   watch: {
-    cartList() { },
+    products() { },
   },
   async created() {
-    this.cartList = await getUserCart(this.profile.id);
+    this.products = await getUserCart(this.profile.id);
   },
   methods: {
+    ...mapActions(useCartStore, ['setCart']),
     async removeProduct(productId) {
       await deleteFromCart(this.profile.id, productId);
-      this.cartList = await getUserCart(this.profile.id);
+      this.products = await getUserCart(this.profile.id);
+      this.setCart();
     },
     clearCart() {
       this.cartList.forEach((prod) => {
         this.removeProduct(prod.id);
       });
       this.isVisible = true;
-      this.cartList.length = 0;
+      this.products.length = 0;
     },
   },
 };
@@ -55,12 +58,12 @@ export default {
   <h3>Shopping Cart</h3>
   <template v-if="isVisible">
     <section class="cart-wrapper">
-      <h3 v-show="!cartList.length" class="no-content">
+      <h3 v-show="!products.length" class="no-content">
         Your shopping cart is empty
       </h3>
 
       <CartProduct
-        v-for="product in cartList"
+        v-for="product in products"
         :key="product.id"
         :product="product"
         @on-click="removeProduct"

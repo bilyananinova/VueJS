@@ -1,8 +1,9 @@
 <script>
-import { mapState } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import { deleteProduct } from '../../services/products';
 import { addCart } from '../../services/cart';
 import { useUserStore } from '../../stores/userStore';
+import { useCartStore } from '../../stores/cartStore';
 
 export default {
   props: {
@@ -22,12 +23,14 @@ export default {
     ...mapState(useUserStore, ['isAdmin', 'profile', 'isAuth']),
   },
   methods: {
+    ...mapActions(useCartStore, ['setCart']),
     async deleteProd(id) {
       await deleteProduct(id);
       this.$router.go(0);
     },
     async addToCart() {
       await addCart(this.product, this.profile.id);
+      this.setCart();
     },
   },
 };

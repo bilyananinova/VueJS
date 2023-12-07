@@ -3,14 +3,20 @@ import { mapActions, mapState } from 'pinia';
 import { RouterLink } from 'vue-router';
 import { logout } from '../services/auth';
 import { useUserStore } from '../stores/userStore';
+import { useCartStore } from '../stores/cartStore';
 
 export default {
   components: { RouterLink },
   computed: {
     ...mapState(useUserStore, ['profile', 'isAdmin', 'isAuth']),
+    ...mapState(useCartStore, ['getCount']),
+  },
+  created() {
+    this.setCart();
   },
   methods: {
     ...mapActions(useUserStore, ['clearStorage']),
+    ...mapActions(useCartStore, ['setCart']),
     async logoutUser() {
       await logout();
       this.clearStorage();
@@ -39,7 +45,7 @@ export default {
         <li class="cart">
           <RouterLink to="/cart">
             <i class="fas fa-shopping-bag" />
-            <span v-if="isAuth || isAdmin" class="cart-count">2</span>
+            <span v-if="isAuth || isAdmin" class="cart-count">{{ getCount }}</span>
           </RouterLink>
         </li>
       </ul>
