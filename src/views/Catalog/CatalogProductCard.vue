@@ -14,8 +14,6 @@ export default {
       name: String,
       description: String,
       img: String,
-      likes: [],
-      dislikes: [],
       price: Number,
     },
   },
@@ -24,8 +22,8 @@ export default {
   },
   methods: {
     ...mapActions(useCartStore, ['setCart']),
-    async deleteProd(id) {
-      await deleteProduct(id);
+    async deleteProd(productId) {
+      await deleteProduct(productId);
       this.$router.go(0);
     },
     async addToCart() {
@@ -168,6 +166,8 @@ export default {
   box-shadow: 0px 0px 5px 1px var(--main-background);
 }
 
+.like-btn span,
+.dislike-btn span,
 .add-btn,
 .delete-btn {
   font-family: Verdana, Geneva, sans-serif;

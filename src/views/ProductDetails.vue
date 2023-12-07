@@ -3,9 +3,9 @@ import { RouterLink, useRoute } from 'vue-router';
 import { mapActions, mapState } from 'pinia';
 import { deleteProduct, getSingleProduct } from '../services/products';
 import { addCart } from '../services/cart';
-import { dislike, like } from '../services/likes';
 import { useUserStore } from '../stores/userStore';
 import { useCartStore } from '../stores/cartStore';
+import { useLikeStore } from '../stores/likeStore';
 
 export default {
   components: { RouterLink },
@@ -16,21 +16,20 @@ export default {
     return {
       product: {},
       id: this.$route.params.id,
-      productLikes: 0,
-      productDislikes: 0,
     };
   },
   computed: {
     ...mapState(useUserStore, ['isAuth', 'profile', 'isAdmin']),
+    ...mapState(useLikeStore, ['likes', 'dislikes']),
   },
   async created() {
     this.product = (await getSingleProduct(this.id)).data();
     this.product.id = this.id;
-    this.productLikes = this.product.likes?.length;
-    this.productDislikes = this.product.dislikes?.length;
+    this.getProduct(this.id);
   },
   methods: {
     ...mapActions(useCartStore, ['setCart']),
+    ...mapActions(useLikeStore, ['getProduct', 'setLike', 'setDislike']),
     async deleteProd(id) {
       await deleteProduct(id);
       this.$router.go(-1);
@@ -39,15 +38,11 @@ export default {
       await addCart(this.product, this.profile.id);
       this.setCart();
     },
-    async likeProduct(id) {
-      await like(id, this.profile.id);
-      this.productLikes = (await getSingleProduct(this.id)).data().likes?.length;
-      this.productDislikes = (await getSingleProduct(this.id)).data().dislikes?.length;
+    likeProduct(id) {
+      this.setLike(id, this.profile.id);
     },
-    async dislikeProduct(id) {
-      await dislike(id, this.profile.id);
-      this.productLikes = (await getSingleProduct(this.id)).data().likes?.length;
-      this.productDislikes = (await getSingleProduct(this.id)).data().dislikes?.length;
+    dislikeProduct(id) {
+      this.setDislike(id, this.profile.id);
     },
   },
 };
@@ -69,10 +64,10 @@ export default {
 
         <div v-if="isAuth" class="details-action">
           <button class="like-btn" @click="likeProduct(id)">
-            <i class="fas fa-thumbs-up" /><span>{{ productLikes }}</span>
+            <i class="fas fa-thumbs-up" /><span>{{ likes }}</span>
           </button>
           <button class="dislike-btn" @click="dislikeProduct(id)">
-            <i class="fas fa-thumbs-down" /><span>{{ productDislikes }}</span>
+            <i class="fas fa-thumbs-down" /><span>{{ dislikes }}</span>
           </button>
           <button class="add-btn" @click="addToCart">
             <i class="fas fa-shopping-cart" />
