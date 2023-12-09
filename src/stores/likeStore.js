@@ -14,8 +14,8 @@ export const useLikeStore = defineStore('like', {
   actions: {
     async getProduct(id) {
       this.product = (await getSingleProduct(id)).data();
-      this.likes = this.product.likes.length;
-      this.dislikes = this.product.dislikes.length;
+      this.likes = this.product.likes?.length || 0;
+      this.dislikes = this.product.dislikes?.length || 0;
     },
     async setLike(productId, userId) {
       await like(productId, userId);

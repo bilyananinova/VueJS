@@ -6,9 +6,11 @@ import { addCart } from '../services/cart';
 import { useUserStore } from '../stores/userStore';
 import { useCartStore } from '../stores/cartStore';
 import { useLikeStore } from '../stores/likeStore';
+import { createComment } from '../services/comments';
+import Comments from './comments/Comments.vue';
 
 export default {
-  components: { RouterLink },
+  components: { RouterLink, Comments },
   setup() {
     return { route: useRoute() };
   },
@@ -16,15 +18,22 @@ export default {
     return {
       product: {},
       id: this.$route.params.id,
+      comments: [],
     };
   },
   computed: {
     ...mapState(useUserStore, ['isAuth', 'profile', 'isAdmin']),
     ...mapState(useLikeStore, ['likes', 'dislikes']),
   },
+  watch: {
+    async comments() {
+      return this.comments = (await getSingleProduct(this.id)).data().comments;
+    },
+  },
   async created() {
     this.product = (await getSingleProduct(this.id)).data();
     this.product.id = this.id;
+    this.comments = this.product.comments;
     this.getProduct(this.id);
   },
   methods: {
@@ -44,6 +53,9 @@ export default {
     dislikeProduct(id) {
       this.setDislike(id, this.profile.id);
     },
+    async onSubmit(content) {
+      await createComment(this.id, this.profile.name, content);
+    },
   },
 };
 </script>
@@ -53,27 +65,25 @@ export default {
     <section class="details-img">
       <img :src="product.img" :alt="product.name">
     </section>
-    <section>
-      <div class="details">
-        <header class="details-header">
-          <h5>{{ product.name }}</h5>
-        </header>
+    <div class="details">
+      <header class="details-header">
+        <h5>{{ product.name }}</h5>
+      </header>
 
-        <span class="details-price">{{ product.price }}$</span>
-        <p>{{ product.description }}</p>
+      <span class="details-price">{{ product.price }}$</span>
+      <p>{{ product.description }}</p>
 
-        <div v-if="isAuth" class="details-action">
-          <button class="like-btn" @click="likeProduct(id)">
-            <i class="fas fa-thumbs-up" /><span>{{ likes }}</span>
-          </button>
-          <button class="dislike-btn" @click="dislikeProduct(id)">
-            <i class="fas fa-thumbs-down" /><span>{{ dislikes }}</span>
-          </button>
-          <button class="add-btn" @click="addToCart">
-            <i class="fas fa-shopping-cart" />
-            add to cart
-          </button>
-        </div>
+      <div v-if="isAuth" class="details-action">
+        <button class="like-btn" @click="likeProduct(id)">
+          <i class="fas fa-thumbs-up" /><span>{{ likes }}</span>
+        </button>
+        <button class="dislike-btn" @click="dislikeProduct(id)">
+          <i class="fas fa-thumbs-down" /><span>{{ dislikes }}</span>
+        </button>
+        <button class="add-btn" @click="addToCart">
+          <i class="fas fa-shopping-cart" />
+          add to cart
+        </button>
 
         <template v-if="isAdmin">
           <RouterLink :to="`/coffee-catalog/${id}/edit`" class="edit-btn">
@@ -87,21 +97,21 @@ export default {
           </button>
         </template>
       </div>
-    </section>
+    </div>
   </section>
+
+  <Comments :product-id="id" :comments="comments" @on-submit="onSubmit($event, content)" />
 </template>
 
 <style scoped>
 .details-wrapper {
-  display: flex;
-  width: 60%;
+  width: 40%;
   margin: 3em auto;
   padding: 1.5em;
-  box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.9);
 }
 
 .details-img {
-  flex: 0 0 30%;
   position: relative;
   overflow: hidden;
 }
@@ -134,8 +144,11 @@ export default {
 }
 
 .details {
-  text-align: left;
-  padding-left: 2em;
+  text-align: justify;
+}
+
+.details p {
+  white-space: pre-wrap;
 }
 
 .details header::after {
@@ -144,7 +157,7 @@ export default {
   background: var(--main-background);
   width: 6em;
   height: 0.1em;
-  margin: 1em 0;
+  margin: 1em auto;
 }
 
 .details-price {
@@ -155,16 +168,15 @@ export default {
   padding-bottom: 1em;
 }
 
+.details-price,
 .details-header h5 {
-  margin-left: 0;
-}
-
-.details-header p {
-  opacity: 0.6;
+  text-align: center;
 }
 
 .details-action {
-  margin: 0.5em 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
 }
 
 .details-action i {
@@ -174,37 +186,31 @@ export default {
 .details-action button,
 .edit-btn,
 .delete-btn {
-  margin: 0 0.8em;
+  margin: 0.5em;
   color: var(--main-font-color);
   background: var(--main-background);
   border: 1px solid var(--main-background);
   padding: 0.5em 0.8em;
   border-radius: 0.3em;
-  text-transform: uppercase;
   font-family: inherit;
+  text-transform: uppercase;
 }
 
-.details-action .add-btn:hover {
+.details-action .add-btn:hover,
+.details-action .like-btn:hover,
+.details-action .dislike-btn:hover {
   border-color: var(--main-background);
   background: #ffffff;
   box-shadow: 0px 0px 5px 1px var(--main-background);
-}
-
-.details-action .like-btn:hover,
-.details-action .dislike-btn:hover {
   cursor: pointer;
 }
 
-.edit-btn:hover {
-  border-color: var(--main-background);
+.edit-btn:is(:hover, :focus) {
   background: #ffe600;
-  box-shadow: 0px 0px 5px 1px var(--main-background);
 }
 
-.delete-btn:hover {
-  border-color: var(--main-background);
+.delete-btn:is(:hover, :focus) {
   color: #ffffff;
   background: #ff0000;
-  box-shadow: 0px 0px 5px 1px var(--main-background);
 }
 </style>

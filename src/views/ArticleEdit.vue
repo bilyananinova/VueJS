@@ -24,11 +24,8 @@ export default {
   methods: {
     async onSubmit() {
       if (await this.v$.$validate()) {
-        const article = await updateArticle(this.id, this.article.title, this.article.content, this.article.img);
-
-        if (article) {
-          this.$router.push({ path: `/articles/${this.id}` });
-        }
+        await updateArticle(this.id, this.article.title, this.article.content, this.article.img);
+        this.$router.push({ path: `/articles/${this.id}` });
       }
       else {
         this.errors = [];
@@ -97,56 +94,56 @@ export default {
 
 <style scoped>
 .edit-article {
-    box-shadow: 0px -1px 7px 0px rgba(0, 0, 0, 0.9);
-    width: 50%;
+  box-shadow: 0px -1px 7px 0px rgba(0, 0, 0, 0.9);
+  width: 50%;
 }
 
 .edit-article-section {
-    margin: 1em auto;
-    padding: 3em 0;
+  margin: 1em auto;
+  padding: 3em 0;
 }
 
 .edit-article-form {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 .edit-article-form label {
-    padding: 1em 0 0.3em;
-    font-size: 1.2em;
-    font-weight: 700;
+  padding: 1em 0 0.3em;
+  font-size: 1.2em;
+  font-weight: 700;
 }
 
 .edit-article-form input,
 .edit-article-form textarea {
-    border: none;
-    border: 1px solid var(--main-background);
-    border-radius: 0.5em;
-    padding: 0.5em;
+  border: none;
+  border: 1px solid var(--main-background);
+  border-radius: 0.5em;
+  padding: 0.5em;
 }
 
 .edit-article-form input:focus,
 .edit-article-form input:hover,
 .edit-article-form textarea:focus,
 .edit-article-form textarea:hover {
-    box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
-    outline: none;
+  box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
+  outline: none;
 }
 
 .edit-article-button {
-    margin: 2em 0 0.5em;
-    padding: 0.5em;
-    font-size: 1.1em;
-    color: var(--main-font-color);
-    font-weight: 700;
-    border: none;
-    border-radius: 0.5em;
-    background: var(--main-background);
+  margin: 2em 0 0.5em;
+  padding: 0.5em;
+  font-size: 1.1em;
+  color: var(--main-font-color);
+  font-weight: 700;
+  border: none;
+  border-radius: 0.5em;
+  background: var(--main-background);
 }
 
 .edit-article-button:hover,
 .edit-article-button:focus {
-    cursor: pointer;
+  cursor: pointer;
 }
 </style>
