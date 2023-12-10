@@ -124,11 +124,11 @@ export default {
   padding: 0.5em;
 }
 
-.create-article-form input:focus,
+.create-article-form input:is:focus,
 .create-article-form input:hover,
 .create-article-form textarea:focus,
 .create-article-form textarea:hover {
-  box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
+  box-shadow: 0px 0px 5px 1px var(--main-background);
   outline: none;
 }
 

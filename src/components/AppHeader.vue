@@ -114,7 +114,7 @@ export default {
 .header-logo h1 {
   margin-bottom: 0;
   font-size: 2.5em;
-  color: #58DF55;
+  color: var(--main-background);
   text-shadow: 1px 1px 1px #000000;
 }
 
@@ -189,7 +189,7 @@ export default {
 .mainav .active a,
 .mainav a:hover,
 .mainav li:hover>a {
-  color: var(--main-font-color-hover);
+  color: #ffff;
   background-color: inherit;
 }
 

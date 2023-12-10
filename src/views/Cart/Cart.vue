@@ -58,7 +58,7 @@ export default {
   <h3>Shopping Cart</h3>
   <template v-if="isVisible">
     <section class="cart-wrapper">
-      <h3 v-show="!products.length" class="no-content">
+      <h3 v-if="!products.length" class="no-content">
         Your shopping cart is empty
       </h3>
 

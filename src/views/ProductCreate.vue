@@ -142,7 +142,7 @@ export default {
 .create-product-form input:hover,
 .create-product-form textarea:focus,
 .create-product-form textarea:hover {
-  box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
+  box-shadow: 0px 0px 5px 1px var(--main-background);
   outline: none;
 }
 

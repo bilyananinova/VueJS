@@ -9,17 +9,14 @@
 }
 
 :root {
-  --main-background: #58DF55;
+  --main-background: #60d09e;
   --main-cards-background: #fff;
   
   --main-font-color: #302f2f;
   --price-font-color: #337a32;
 
-  --main-shadow-hover: #3a8b38;
-  --main-font-color-hover: #fff;
-
   --main-font-color-footer: #fff;
-  --main-copyright-background: #337a32;
+  --main-copyright-background: #3aa575;
 
   --main-font-family-headings: Georgia, "Times New Roman", Times, serif;
   --main-font-family-body: Verdana, Geneva, sans-serif;

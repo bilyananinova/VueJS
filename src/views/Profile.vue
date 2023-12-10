@@ -134,6 +134,6 @@ export default {
 .user-product-action a:hover {
   color: var(--main-font-color);
   background: #fff;
-  box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
+  box-shadow: 0px 0px 5px 1px var(--main-background);
 }
 </style>

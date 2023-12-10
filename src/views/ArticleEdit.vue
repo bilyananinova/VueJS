@@ -127,7 +127,7 @@ export default {
 .edit-article-form input:hover,
 .edit-article-form textarea:focus,
 .edit-article-form textarea:hover {
-  box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
+  box-shadow: 0px 0px 5px 1px var(--main-background);
   outline: none;
 }
 
