@@ -1,5 +1,8 @@
 <script>
+import { RouterLink } from 'vue-router';
+
 export default {
+  components: { RouterLink },
   props: {
     product: {
       type: Object,
@@ -15,7 +18,7 @@ export default {
 </script>
 
 <template>
-  <router-link :to="`/coffee-catalog/${product.id}`">
+  <RouterLink :to="`/coffee-catalog/${product.id}`">
     <section class="home-coffee-card">
       <section class="home-coffee-image">
         <img :src="product.img" :alt="product.name">
@@ -23,19 +26,19 @@ export default {
       <header class="home-coffee-header">
         <h6>{{ product.name }}</h6>
       </header>
-      <section class="home-coffee-description">
+      <section class="home-coffee-price">
         <p>
-          {{ product.description.substring(0, 100) }}...
+          {{ product.price }} $
         </p>
       </section>
     </section>
-  </router-link>
+  </RouterLink>
 </template>
 
 <style scoped>
 .home-coffee-card {
-  width: 20em;
-  height: auto;
+  width: 18em;
+  height: 30em;
   padding: 2em;
   border-radius: 0.5em;
   box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.9);
@@ -66,5 +69,11 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.home-coffee-price {
+  color: var(--price-font-color);
+  font-weight: 600;
+
 }
 </style>

@@ -22,12 +22,12 @@ export default {
 
 <template>
   <section class="home-wrapper">
-    <h3>From Our Blog</h3>
+    <h3>Recent Articles</h3>
     <section class="last-articles">
       <ArticleCard v-for="article in articles" :key="article.id" :article="article" />
     </section>
 
-    <h3>From Our Shop</h3>
+    <h3>Recent Products</h3>
     <section class="last-products">
       <ProductCard v-for="product in products" :key="product.id" :product="product" />
     </section>
@@ -50,12 +50,12 @@ export default {
 .last-products {
   margin: 2em auto 5em;
   display: flex;
-  justify-content: space-between;
   width: 90%;
   height: auto;
 }
 
-.last-articles {
-  justify-content: space-evenly;
+.last-articles,
+.last-products {
+  justify-content: space-around;
 }
 </style>

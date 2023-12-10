@@ -24,7 +24,7 @@ export default {
       </header>
       <section class="home-article-content">
         <p>
-          {{ article.content.substring(0, 150) }}...
+          {{ (article.createdAt).toDate().toDateString() }}
         </p>
       </section>
     </section>
@@ -33,40 +33,41 @@ export default {
 
 <style scoped>
 .home-article-card {
-    width: 22em;
-    height: auto;
-    padding: 0.5em;
-    border-radius: 0.5em;
-    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.9);
-    color: var(--main-font-color);
-    background: var(--main-cards-background);
+  width: 22em;
+  height: 22em;
+  overflow: hidden;
+  border-radius: 0.5em;
+  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.9);
+  color: var(--main-font-color);
+  background: var(--main-cards-background);
 }
 
 .home-article-image {
-    position: relative;
-    width: 100%;
-    margin: 0.5em auto;
-    border-radius: 0.5em;
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  border-radius: 0.5em;
+  overflow: hidden;
 }
 
 .home-article-image::before {
-    display: block;
-    content: '';
-    padding-top: 56.25%;
+  display: block;
+  content: '';
+  padding-top: 56.25%;
 }
 
 .home-article-image img {
-    display: block;
-    width: 100%;
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  display: block;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .home-article-content p {
-    padding-bottom: 1em;
+  font-weight: 100;
+  font-size: 12px;
+  opacity: 0.7;
 }
 </style>
