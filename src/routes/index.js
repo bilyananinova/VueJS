@@ -6,7 +6,7 @@ import Cart from '../views/Cart/Cart.vue';
 import NotFound from '../views/NotFound.vue';
 
 import Catalog from '../views/Catalog/Catalog.vue';
-import ProductDetails from '../views/ProductDetails.vue';
+import ProductDetails from '../views/DetailsPage/ProductDetails.vue';
 import ProductCreate from '../views/ProductCreate.vue';
 import ProductEdit from '../views/ProductEdit.vue';
 

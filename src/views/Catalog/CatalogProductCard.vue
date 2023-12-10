@@ -1,6 +1,5 @@
 <script>
 import { mapActions, mapState } from 'pinia';
-import { deleteProduct } from '../../services/products';
 import { addCart } from '../../services/cart';
 import { useUserStore } from '../../stores/userStore';
 import { useCartStore } from '../../stores/cartStore';
@@ -17,19 +16,20 @@ export default {
       price: Number,
     },
   },
+  emits: ['remove'],
   computed: {
     ...mapState(useUserStore, ['isAdmin', 'profile', 'isAuth']),
   },
   methods: {
     ...mapActions(useCartStore, ['setCart']),
-    async deleteProd(productId) {
-      await deleteProduct(productId);
-      this.$router.go(0);
-    },
     async addToCart() {
       await addCart(this.product, this.profile.id);
       this.setCart();
     },
+    deleteProd(productId) {
+      this.$emit('remove', productId);
+    },
+
   },
 };
 </script>
@@ -129,6 +129,8 @@ export default {
 
 .product-action {
   margin: 1.5em 0;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .product-action i {
@@ -144,32 +146,22 @@ export default {
   color: var(--main-font-color);
   background: var(--main-background);
   margin-right: 0.8em;
+  font-family: var(--main-font-family-body);
 }
 
 .product-action button:hover,
 .product-action a:hover {
   color: var(--main-font-color);
   background: #fff;
-  box-shadow: 0px 0px 5px 1px var(--main-shadow-hover);
+  box-shadow: 0px 0px 5px 1px var(--main-background);
 }
 
 .product-action .edit-btn:hover {
-  border-color: var(--main-background);
   background: #ffe600;
-  box-shadow: 0px 0px 5px 1px var(--main-background);
 }
 
 .product-action .delete-btn:hover {
-  border-color: var(--main-background);
   color: #ffffff;
   background: #ff0000;
-  box-shadow: 0px 0px 5px 1px var(--main-background);
-}
-
-.like-btn span,
-.dislike-btn span,
-.add-btn,
-.delete-btn {
-  font-family: Verdana, Geneva, sans-serif;
 }
 </style>

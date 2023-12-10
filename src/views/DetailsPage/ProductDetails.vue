@@ -1,13 +1,13 @@
 <script>
 import { RouterLink, useRoute } from 'vue-router';
 import { mapActions, mapState } from 'pinia';
-import { deleteProduct, getSingleProduct } from '../services/products';
-import { addCart } from '../services/cart';
-import { useUserStore } from '../stores/userStore';
-import { useCartStore } from '../stores/cartStore';
-import { useLikeStore } from '../stores/likeStore';
-import { createComment } from '../services/comments';
-import Comments from './comments/Comments.vue';
+import { deleteProduct, getSingleProduct } from '../../services/products';
+import { addCart } from '../../services/cart';
+import { useUserStore } from '../../stores/userStore';
+import { useCartStore } from '../../stores/cartStore';
+import { useLikeStore } from '../../stores/likeStore';
+import { createComment } from '../../services/comments';
+import Comments from './Comments.vue';
 
 export default {
   components: { RouterLink, Comments },
@@ -24,11 +24,6 @@ export default {
   computed: {
     ...mapState(useUserStore, ['isAuth', 'profile', 'isAdmin']),
     ...mapState(useLikeStore, ['likes', 'dislikes']),
-  },
-  watch: {
-    async comments() {
-      return this.comments = (await getSingleProduct(this.id)).data().comments;
-    },
   },
   async created() {
     this.product = (await getSingleProduct(this.id)).data();
@@ -55,6 +50,7 @@ export default {
     },
     async onSubmit(content) {
       await createComment(this.id, this.profile.name, content);
+      this.comments = (await getSingleProduct(this.id)).data().comments;
     },
   },
 };
