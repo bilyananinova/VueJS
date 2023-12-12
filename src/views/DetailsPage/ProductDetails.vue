@@ -36,7 +36,7 @@ export default {
     ...mapActions(useLikeStore, ['getProduct', 'setLike', 'setDislike']),
     async deleteProd(id) {
       await deleteProduct(id);
-      this.$router.go(-1);
+      this.$router.push({ path: '/coffee-catalog' });
     },
     async addToCart() {
       await addCart(this.product, this.profile.id);

@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      error: '',
+      errorMsg: '',
       content: '',
     };
   },
@@ -34,12 +34,13 @@ export default {
     };
   },
   methods: {
-    async onSubmit(content) {
+    async onSubmit() {
       if (await this.v$.$validate()) {
-        this.$emit('onSubmit', content);
+        this.$emit('onSubmit', this.content);
+        this.content = '';
       }
       else {
-        this.error = this.v$.$errors[0].$message;
+        this.errorMsg = this.v$?.$errors[0].$message;
       }
     },
   },
@@ -87,7 +88,7 @@ export default {
         cols="5"
         rows="2"
       />
-      <span v-if="error">{{ error }}</span>
+      <span v-if="errorMsg">{{ errorMsg }}</span>
       <input type="submit">
     </form>
   </div>
