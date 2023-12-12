@@ -94,8 +94,8 @@
 .site-footer {
     display: flex;
     background: var(--main-background);
-    color: var(--main-font-color-footer);
-    text-shadow: 1px 2px 3px #302f2f;
+    color: var(--main-font-color);
+    /* text-shadow: 1px 1px 1px #302f2f; */
     position: relative;
 }
 
@@ -104,13 +104,14 @@
     margin-bottom: 1em;
 }
 
-.site-footer .links li,
-.site-footer .social-media li {
-    text-shadow: none;
+.site-footer .links li a:hover,
+.site-footer .social-media li a:hover {
+  color: var(--main-font-color-footer);
 }
 
 .footer-title {
     padding-bottom: 0.5em;
+    font-weight: 600;
 }
 
 .site-footer ul {

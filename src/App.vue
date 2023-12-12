@@ -19,3 +19,9 @@ export default {
   </main>
   <AppFooter />
 </template>
+
+<style>
+.site-main {
+  min-height: 70vh;
+}
+</style>

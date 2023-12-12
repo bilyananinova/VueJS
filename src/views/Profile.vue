@@ -136,4 +136,8 @@ export default {
   background: #fff;
   box-shadow: 0px 0px 5px 1px var(--main-background);
 }
+
+.no-content{
+  padding: 2em;
+}
 </style>
