@@ -131,7 +131,7 @@ export default {
 .product-action {
   margin: 1.5em 0;
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: flex-end;  */
 }
 
 .product-action i {
