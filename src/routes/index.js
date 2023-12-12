@@ -21,8 +21,11 @@ import Profile from '../views/Profile.vue';
 
 function validateIsAdminAndRedirect() {
   const userStore = useUserStore();
-  if (!userStore.isAdmin && !userStore.isAuth) {
-    return { path: '/login' };
+
+  console.log(userStore.isAdmin);
+  console.log(userStore.isAuth);
+  if (userStore.isAdmin === false) {
+    return { path: '/' };
   }
 }
 
@@ -38,12 +41,16 @@ const routes = [
   { path: '/articles', component: Blog },
   { path: '/articles/:id', component: ArticleDetails },
   { path: '/articles/:id/edit', component: ArticleEdit, beforeEnter: validateIsAdminAndRedirect },
-  { path: '/cart', component: Cart, beforeEnter: () => {
-    const userStore = useUserStore();
-    if (!userStore.isAuth) {
-      return { path: '/login' };
-    }
-  } },
+  {
+    path: '/cart',
+    component: Cart,
+    beforeEnter: () => {
+      const userStore = useUserStore();
+      if (!userStore.isAuth) {
+        return { path: '/login' };
+      }
+    },
+  },
   { path: '/user/:id', component: Profile },
   { path: '/:pathMatch(.*)*', component: NotFound },
 ];
