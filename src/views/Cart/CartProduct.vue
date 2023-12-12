@@ -14,6 +14,7 @@ export default {
       description: String,
       img: String,
       price: Number,
+      comments: Array,
       qty: Number,
     },
   },

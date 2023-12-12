@@ -12,6 +12,7 @@ export default {
       price: Number,
       description: String,
       id: String,
+      comments: Array,
     },
   },
 };

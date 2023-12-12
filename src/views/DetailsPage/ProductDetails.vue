@@ -96,7 +96,7 @@ export default {
     </div>
   </section>
 
-  <Comments :product-id="id" :comments="comments" @on-submit="onSubmit($event, content)" />
+  <Comments :comments="comments" @on-submit="onSubmit($event, content)" />
 </template>
 
 <style scoped>

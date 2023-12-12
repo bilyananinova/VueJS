@@ -47,6 +47,7 @@ export async function createProduct(data) {
       price: data.price,
       img: data.img,
       createdAt: new Date(),
+      comments: [],
     });
   }
   catch (error) {

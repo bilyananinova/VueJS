@@ -6,10 +6,10 @@ import { useUserStore } from '../../stores/userStore';
 
 export default {
   props: {
-    productId: {
-      type: String,
+    comments: {
+      type: Array,
+      default: () => [],
     },
-    comments: [],
   },
   emits: ['onSubmit'],
   setup() {
@@ -19,8 +19,8 @@ export default {
   },
   data() {
     return {
+      error: '',
       content: '',
-      errorMsg: '',
     };
   },
   computed: {
@@ -34,13 +34,12 @@ export default {
     };
   },
   methods: {
-    async onSubmit() {
+    async onSubmit(content) {
       if (await this.v$.$validate()) {
-        this.$emit('onSubmit', this.content);
-        this.content = '';
+        this.$emit('onSubmit', content);
       }
       else {
-        this.errorMsg = this.v$?.$errors[0].$message;
+        this.error = this.v$.$errors[0].$message;
       }
     },
   },
@@ -51,7 +50,7 @@ export default {
   <div>
     <section class="commentSection">
       <h5>Comments</h5>
-      <template v-if="comments">
+      <template v-if="comments.length">
         <div v-for="comment in comments" :key="comment.createdAt" class="comment">
           <p>
             <span class="author">{{ comment.author }}</span> - <span class="date">{{ new
@@ -88,7 +87,7 @@ export default {
         cols="5"
         rows="2"
       />
-      <span v-if="errorMsg">{{ errorMsg }}</span>
+      <span v-if="error">{{ error }}</span>
       <input type="submit">
     </form>
   </div>
@@ -143,7 +142,7 @@ export default {
 }
 
 .commentForm input:is(:hover, :focus),
-.commentForm textarea:is(:hover, :focus){
+.commentForm textarea:is(:hover, :focus) {
   outline: none;
   box-shadow: 0px 0px 5px 1px var(--main-background);
 }
